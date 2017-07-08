@@ -8,8 +8,8 @@ ansibullbot_github_username: ansibot
 ansibullbot_github_password: ''
 ansibullbot_github_token: ''
 ansibullbot_shippable_token: ''
-ansibullbot_receiver_host:
-ansibullbot_receiver_port:
+ansibullbot_receiver_host: ''
+ansibullbot_receiver_port: ''
 
 ansibullbot_packages:
   - tmux
