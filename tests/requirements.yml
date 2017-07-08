@@ -1,2 +1,2 @@
-- src: samdoran.java
-  name: java
+- src: samdoran.repo-epel
+  name: repo-epel

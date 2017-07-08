@@ -1,0 +1,61 @@
+- name: Install packages
+  yum:
+    name: "{{ ansibullbot_packages }}"
+    state: latest
+  tags:
+    - ansibullbot
+
+- name: Create {{ ansibullbot_group }} group
+  group:
+    name: "{{ ansibullbot_group }}"
+    gid: 1099
+  tags:
+    - ansibullbot
+
+- name: Create {{ ansibullbot_user }} account
+  user:
+    name: "{{ ansibullbot_user }}"
+    uid: 1099
+  tags:
+    - ansibullbot
+
+- name: Copy dotfiles for root
+  copy:
+    src: "{{ item }}"
+    dest: ~root/.{{ item | basename }}
+    owner: root
+    group: root
+  with_fileglob: dotfiles/*
+  tags:
+    - ansibullbot
+    - ansibullbot_dotfiles
+
+- name: Copy ansibullbot.cfg
+  template:
+    src: ansibullbot.cfg.j2
+    dest: ~{{ ansibullbot_user }}/.ansibullbot.cfg
+    owner: "{{ ansibullbot_user }}"
+    group: "{{ ansibullbot_group }}"
+    mode: 0600
+  tags:
+    - ansibullbot
+    - ansibullbot_dotfiles
+
+- name: Checkout git repo
+  git:
+    repo: https://github.com/ansible/ansibullbot
+    dest: "{{ ansibullbot_clone_path }}"
+    recursive: yes
+    force: yes
+  become_user: "{{ ansibullbot_user }}"
+  tags:
+    - ansibullbot
+    - ansibullbot_git
+    - ansibullbot_update
+
+- name: Install Python requirements
+  pip:
+    requirements: "{{ ansibullbot_clone_path }}/requirements.txt"
+  tags:
+    - ansibullbot
+    - ansibullbot_pip

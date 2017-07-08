@@ -17,8 +17,8 @@ script:
   - docker run --detach --volume="$PWD":/etc/ansible/roles/role_under_test:ro --name $container_id $run_opts samdoran/${distro}-ansible:latest $init
 
   # Install dependencies
-  # - echo "Installing role dependencies"
-  # - docker exec --tty $container_id ansible-galaxy install -r /etc/ansible/roles/role_under_test/tests/requirements.yml
+  - echo "Installing role dependencies"
+  - docker exec --tty $container_id ansible-galaxy install -r /etc/ansible/roles/role_under_test/tests/requirements.yml
 
   # Ansible syntax check.
   - echo "Checking role syntax"

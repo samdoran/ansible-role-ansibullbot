@@ -3,4 +3,5 @@
   become: yes
 
   roles:
+    - repo-epel
     - ansibullbot

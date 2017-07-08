@@ -1,1 +1,21 @@
+ansibullbot_user: ansibot
+ansibullbot_group: "{{ ansibullbot_user }}"
+ansibullbot_clone_path: ~{{ ansibullbot_user }}/ansibullbot
 
+# Settings for ansibullbot.cfg
+ansibullbot_debug: True
+ansibullbot_github_username: ansibot
+ansibullbot_github_password: ''
+ansibullbot_github_token: ''
+ansibullbot_shippable_token: ''
+ansibullbot_receiver_host:
+ansibullbot_receiver_port:
+
+ansibullbot_packages:
+  - tmux
+  - vim
+  - git
+  - unzip
+  - python2-pip
+  - gcc
+  - python-devel
