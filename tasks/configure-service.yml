@@ -1,0 +1,39 @@
+- name: Create initial log file
+  copy:
+    force: no
+    dest: "{{ ansibullbot_log_path }}"
+    content: ''
+    owner: "{{ ansibullbot_user }}"
+    group: "{{ ansibullbot_group }}"
+  tags:
+    - ansibullbot
+    - ansibullbot_logs
+
+- name: Setup log rotation
+  template:
+    src: logrotate_ansibullbot.j2
+    dest: /etc/logrotate.d/ansibullbot
+  tags:
+    - ansibullbot
+    - ansibullbot_logs
+
+- name: Copy SystemD service file
+  template:
+    src: sytmed_ansibullbot.j2
+    dest: /etc/systemd/system/ansibullbot.service
+    owner: root
+    group: root
+    mode: 0644
+  tags:
+    - ansibullbot
+    - ansibullbot_service
+
+- name: Start and enable ansibullbot
+  systemd:
+    name: ansibullbot
+    daemon_reload: yes
+    enabled: no
+    state: stopped
+  tags:
+    - ansibullbot
+    - ansibullbot_service

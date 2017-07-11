@@ -1,0 +1,10 @@
+# {{ ansible_managed }}
+# Rotate ansibullbot logs
+{{ ansibullbot_log_path }} {
+    size 500M
+    compress
+    notifempty
+    create 0644 {{ ansibullbot_user }} {{ ansibullbot_group }}
+    rotate 2
+    nodateext
+}

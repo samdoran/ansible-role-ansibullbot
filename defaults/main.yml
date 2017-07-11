@@ -1,6 +1,7 @@
 ansibullbot_user: ansibot
 ansibullbot_group: "{{ ansibullbot_user }}"
 ansibullbot_clone_path: ~{{ ansibullbot_user }}/ansibullbot
+ansibullbot_log_path: /var/log/ansibullbot.log
 
 # Settings for ansibullbot.cfg
 ansibullbot_debug: True

@@ -1,3 +1,9 @@
+- name: Set hostname
+  hostname:
+    name: ansibullbot.eng.ansible.com
+  tags:
+    - ansibullbot
+
 - name: Install packages
   yum:
     name: "{{ ansibullbot_packages }}"
@@ -18,6 +24,21 @@
     uid: 1099
   tags:
     - ansibullbot
+
+- name: Set ssh authorized_keys for centos
+  authorized_key:
+    key: "{{ item.key_material }}"
+    user: centos
+  with_items: "{{ botinstance_ssh_keys }}"
+
+- name: Set ssh authorized_keys for {{ ansibullbot_user }}
+  authorized_key:
+    key: "{{ item.key_material }}"
+    user: "{{ansibullbot_user}}"
+  with_items: "{{ botinstance_ssh_keys }}"
+  tags:
+    - ansibullbot
+    - ssh
 
 - name: Copy dotfiles for root
   copy:
@@ -59,3 +80,6 @@
   tags:
     - ansibullbot
     - ansibullbot_pip
+
+- include: configure-service.yml
+- include: monitoring.yml
