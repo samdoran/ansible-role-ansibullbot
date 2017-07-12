@@ -3,6 +3,7 @@
     name: ansibullbot.eng.ansible.com
   tags:
     - ansibullbot
+    - ansibullbot_hostname
 
 - name: Install packages
   yum:
