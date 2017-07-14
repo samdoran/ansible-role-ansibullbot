@@ -85,6 +85,7 @@
 - name: Download stopwords
   shell: python -c 'import nltk; nltk.download("punkt")'
   become_user: "{{ ansibullbot_user }}"
+  become: yes
   args:
     creates: ~{{ ansibullbot_user }}/nltk_data
   tags:
