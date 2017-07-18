@@ -2,6 +2,9 @@ ansibullbot_user: ansibot
 ansibullbot_group: "{{ ansibullbot_user }}"
 ansibullbot_clone_path: ~{{ ansibullbot_user }}/ansibullbot
 ansibullbot_log_path: /var/log/ansibullbot.log
+ansibullbot_cache_dir: ~{{ ansibullbot_user }}/cache/shippable/runs/.raw
+ansibullbot_cache_days_to_keep: 30
+
 
 # Settings for ansibullbot.cfg
 ansibullbot_debug: True
