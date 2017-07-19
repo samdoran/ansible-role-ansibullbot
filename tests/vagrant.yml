@@ -2,6 +2,18 @@
   remote_user: vagrant
   become: yes
 
+  vars_files:
+    - vars.yml
+
+  pre_tasks:
+    - name: Create centos group
+      group:
+        name: centos
+
+    - name: Create centos user
+      user:
+        name: centos
   roles:
+    - firewall
     - repo-epel
     - ansibullbot
