@@ -22,6 +22,8 @@
     cron_file: ansibullbot
     hour: 03
     minute: 11
+    user: "{{ ansibullbot_user }}"
+    name: Cleanup Shippable cache
     job: find {{ ansibullbot_cache_dir }} -type f -atime +{{ ansibullbot_cache_days_to_keep }} -exec rm -f '{}' ';'
   tags:
     - ansibullbot
