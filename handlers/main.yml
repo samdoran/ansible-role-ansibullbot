@@ -1,0 +1,5 @@
+- name: restart ansibullbot
+  systemd:
+    name: ansibullbot
+    daemon_reload: yes
+    state: restarted

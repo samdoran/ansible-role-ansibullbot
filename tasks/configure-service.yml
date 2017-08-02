@@ -29,3 +29,25 @@
     - ansibullbot
     - ansibullbot_cache
     - ansibullbot_cron
+
+- name: Copy SystemD service file
+  template:
+    src: systemd_ansibullbot.j2
+    dest: /etc/systemd/system/ansibullbot.service
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart ansibullbot
+  tags:
+    - ansibullbot
+    - ansibullbot_service
+
+- name: Start and enable ansibullbot
+  systemd:
+    name: ansibullbot
+    daemon_reload: yes
+    enabled: yes
+    state: started
+  tags:
+    - ansibullbot
+    - ansibullbot_service
