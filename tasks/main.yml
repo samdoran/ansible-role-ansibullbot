@@ -1,3 +1,12 @@
+# Only needed due monitoring via CGI script. Once that is changed, SELinux
+# can be set to Enforcing again.
+- name: Disable SELinux
+  selinux:
+    state: disabled
+  tags:
+    - ansibullbot
+    - ansibullbot_selinux
+
 - name: Set hostname
   hostname:
     name: ansibullbot.eng.ansible.com
@@ -22,6 +31,7 @@
 - name: Create {{ ansibullbot_user }} account
   user:
     name: "{{ ansibullbot_user }}"
+    home: "{{ ansibullbot_home_dir }}"
     uid: 1099
   tags:
     - ansibullbot

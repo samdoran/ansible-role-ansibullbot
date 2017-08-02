@@ -17,7 +17,11 @@ Role Variables
 |-------------------|---------------------|----------------------|
 | `ansibullbot_user` | `ansibot` | User account that will run `ansibullbot` |
 | `ansibullbot_group` | `{{ ansibullbot_user }}` | Group that `ansibullbot_user` belongs to. |
-| `ansibullbot_clone_path` | `~{{ ansibullbot_user }}/ansibullbot` | Where to clone the `ansibullbot` git repository. |
+| `ansibullbot_home_dir` | `/home/{{ ansibullbot_user }}` | Where to create home directory for Ansibullbot user. |
+| `ansibullbot_clone_path` | `{{ ansibullbot_home_dir }}/ansibullbot` | Where to clone the `ansibullbot` git repository. |
+| `ansibullbot_log_path` | `/var/log/ansibullbot.log` | Path to log file. |
+| `ansibullbot_cache_dir` | `{{ ansibullbot_home_dir }}/.ansibullbot/cache/shippable.runs/.raw` | Where cache files are stored. Used for cleaning up old cache files. |
+| `ansibullbot_cache_days_to_keep` | `30` | How many days wort of cache files to keep. |
 | `ansibullbot_debug` | `True` | Whether or not to enable debugging. |
 | `ansibullbot_github_username` | `ansibot` | GitHub account used for authenticating to the GitHub API. |
 | `ansibullbot_github_password` | `''` | Password for authenticating to the GitHub. This should be stored in an Ansible Vault. |
@@ -25,6 +29,7 @@ Role Variables
  | `ansibullbot_shippable_token` | `''` | Taken for talking to the Shippable API. This should be stored in an Ansible Vault. |
  | `ansibullbot_receiver_host` | `''` | Database where data is sent. |
  | `ansibullbot_receiver_port` | `''` | Database port. |
+ | `ansibullbot_packages` | [see `defaults/main.yml`] | List of packages to install. |
 
 Dependencies
 ------------
@@ -36,7 +41,10 @@ Example Playbook
 
     - hosts: all
       roles:
-         - samdoran.ansibullbot
+          - samdoran.repo-epel
+          - samdoran.firewall
+          - samdoran.fail2ban
+          - samdoran.ansibullbot
 
 License
 -------
