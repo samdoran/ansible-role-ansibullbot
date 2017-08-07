@@ -1,6 +1,6 @@
 # {{ ansible_managed }}
 [Unit]
-Description=Run Ansibullbot
+Description=Ansibullbot
 After=syslog.target
 
 [Service]
@@ -11,7 +11,7 @@ TimeoutStartSec=infinity
 Restart=on-failure
 StandardOutput=null
 StandardError=null
-ExecStart={{ ansibullbot_clone_path }}/triage_ansible.py --daemonize --daemonize_interval=300 --debug --verbose --issue_component_matching --force --logfile {{ ansibullbot_log_path }}
+ExecStart={{ ansibullbot_clone_path }}/triage_ansible.py --daemonize --daemonize_interval={{ ansibullbot_daemonize_interval }} --debug --verbose --issue_component_matching --force --logfile {{ ansibullbot_log_path }}
 WorkingDirectory={{ ansibullbot_clone_path }}
 
 [Install]

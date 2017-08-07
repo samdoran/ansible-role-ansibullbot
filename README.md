@@ -15,6 +15,7 @@ Role Variables
 
 | Name              | Default Value       | Description          |
 |-------------------|---------------------|----------------------|
+| `ansibullbot_action` | `install` | Set of tasks to run. Options are `install` and `update`. |
 | `ansibullbot_user` | `ansibot` | User account that will run `ansibullbot` |
 | `ansibullbot_group` | `{{ ansibullbot_user }}` | Group that `ansibullbot_user` belongs to. |
 | `ansibullbot_home_dir` | `/home/{{ ansibullbot_user }}` | Where to create home directory for Ansibullbot user. |

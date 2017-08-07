@@ -1,3 +1,4 @@
+ansibullbot_action: install
 ansibullbot_user: ansibot
 ansibullbot_group: "{{ ansibullbot_user }}"
 ansibullbot_home_dir: /home/{{ ansibullbot_user }}
@@ -5,6 +6,7 @@ ansibullbot_clone_path: "{{ ansibullbot_home_dir }}/ansibullbot"
 ansibullbot_log_path: /var/log/ansibullbot.log
 ansibullbot_cache_dir: "{{ ansibullbot_home_dir }}/.ansibullbot/cache/shippable.runs/.raw"
 ansibullbot_cache_days_to_keep: 30
+ansibullbot_daemonize_interval: 300
 
 
 # Settings for ansibullbot.cfg

@@ -1,0 +1,12 @@
+- name: Get latest revision
+  git:
+    repo: https://github.com/ansible/ansibullbot
+    dest: "{{ ansibullbot_clone_path }}"
+    force: yes
+  become_user: "{{ ansibullbot_user }}"
+  notify: restart ansibullbot
+  tags:
+    - ansibullbot
+    - ansibullbot_git
+    - ansibullbot_update
+
