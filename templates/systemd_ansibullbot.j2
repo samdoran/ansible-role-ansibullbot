@@ -7,13 +7,16 @@ After=syslog.target
 Type=simple
 User={{ ansibullbot_user }}
 Group={{ ansibullbot_group }}
-TimeoutStartSec=infinity
+
 Restart=on-failure
+
 StandardOutput=null
 StandardError=null
+
+ExecStartPost=-/bin/sh -c "{{ ansibullbot_clone_path }}/scripts/slack-notice.py -m 'I just started'"
 ExecStart={{ ansibullbot_clone_path }}/triage_ansible.py --daemonize --daemonize_interval={{ ansibullbot_daemonize_interval }} --debug --verbose --issue_component_matching --skip_no_update --skip_no_update_timeout --force --logfile {{ ansibullbot_log_path }}
+ExecStopPost=-/bin/sh -c "{{ ansibullbot_clone_path }}/scripts/slack-notice.py -m 'I just stopped'"
 WorkingDirectory={{ ansibullbot_clone_path }}
-FailureAction={{ ansibullbot_clone_path }}/scripts/slack-notice.py -m 'Ansibullbot restarted due to failure'
 
 [Install]
 WantedBy=multi-user.target
