@@ -4,6 +4,9 @@ github_username={{ ansibullbot_github_username }}
 github_password={{ ansibullbot_github_password }}
 github_token={{ ansibullbot_github_token }}
 shippable_token={{ ansibullbot_shippable_token }}
+{% if ansibullbot_slack_url is defined %}
+slack_url={{ ansibullbot_slack_url }}
+{% endif %}
 
 [receiver]
 host={{ ansibullbot_receiver_host }}
