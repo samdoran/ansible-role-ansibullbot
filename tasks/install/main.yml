@@ -43,6 +43,9 @@
     key: "{{ item.key_material }}"
     user: centos
   with_items: "{{ botinstance_ssh_keys }}"
+  tags:
+    - ansibullbot
+    - ssh
 
 - name: Set ssh authorized_keys for {{ ansibullbot_user }}
   authorized_key:
