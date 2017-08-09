@@ -1,3 +1,4 @@
+#jinja2: trim_blocks: False
 # {{ ansible_managed }}
 [Unit]
 Description=Ansibullbot
@@ -14,7 +15,7 @@ StandardOutput=null
 StandardError=null
 
 ExecStartPost=-/bin/sh -c "{{ ansibullbot_clone_path }}/scripts/slack-notice.py -m 'I just started'"
-ExecStart={{ ansibullbot_clone_path }}/triage_ansible.py --daemonize --daemonize_interval={{ ansibullbot_daemonize_interval }} --debug --verbose --issue_component_matching --skip_no_update --skip_no_update_timeout --force --logfile {{ ansibullbot_log_path }}
+ExecStart={{ ansibullbot_clone_path }}/triage_ansible.py {% for option in ansibullbot_options %}--{{ option }}{% if not loop.last %} {% endif %}{% endfor %}
 ExecStopPost=-/bin/sh -c "{{ ansibullbot_clone_path }}/scripts/slack-notice.py -m 'I just stopped'"
 WorkingDirectory={{ ansibullbot_clone_path }}
 

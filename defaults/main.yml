@@ -5,8 +5,17 @@ ansibullbot_home_dir: /home/{{ ansibullbot_user }}
 ansibullbot_clone_path: "{{ ansibullbot_home_dir }}/ansibullbot"
 ansibullbot_log_path: /var/log/ansibullbot.log
 ansibullbot_cache_dir: "{{ ansibullbot_home_dir }}/.ansibullbot/cache/shippable.runs/.raw"
+
+# Options passed to triage_ansible.py
 ansibullbot_cache_days_to_keep: 30
 ansibullbot_daemonize_interval: 300
+ansibullbot_options:
+  - daemonize
+  - daemonize_interval={{ ansibullbot_daemonize_interval }}
+  - force
+  - logfile {{ ansibullbot_log_path }}
+  - issue_component_matching
+  - verbose
 
 
 # Settings for ansibullbot.cfg
