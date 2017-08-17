@@ -14,7 +14,6 @@ ansibullbot_options:
   - daemonize_interval={{ ansibullbot_daemonize_interval }}
   - force
   - logfile {{ ansibullbot_log_path }}
-  - issue_component_matching
   - verbose
 
 
