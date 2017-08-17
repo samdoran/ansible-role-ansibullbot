@@ -1,10 +1,15 @@
 ansibullbot_action: install
 ansibullbot_user: ansibot
 ansibullbot_group: "{{ ansibullbot_user }}"
+ansibullbot_repo_url: https://github.com/ansible/ansibullbot
 ansibullbot_home_dir: /home/{{ ansibullbot_user }}
 ansibullbot_clone_path: "{{ ansibullbot_home_dir }}/ansibullbot"
 ansibullbot_log_path: /var/log/ansibullbot.log
 ansibullbot_cache_dir: "{{ ansibullbot_home_dir }}/.ansibullbot/cache/shippable.runs/.raw"
+
+# Slack notice
+ansibullbot_slack_message: Updating Ansibullbot
+ansibullbot_slack_token: []
 
 # Options passed to triage_ansible.py
 ansibullbot_cache_days_to_keep: 30

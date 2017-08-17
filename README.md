@@ -18,6 +18,7 @@ Role Variables
 | `ansibullbot_action` | `install` | Set of tasks to run. Options are `install` and `update`. |
 | `ansibullbot_user` | `ansibot` | User account that will run `ansibullbot` |
 | `ansibullbot_group` | `{{ ansibullbot_user }}` | Group that `ansibullbot_user` belongs to. |
+| `ansibullbot_repo_url` | `https://github.com/ansible/ansibullbot` | URL of the ansibullbot git repo. |
 | `ansibullbot_home_dir` | `/home/{{ ansibullbot_user }}` | Where to create home directory for Ansibullbot user. |
 | `ansibullbot_clone_path` | `{{ ansibullbot_home_dir }}/ansibullbot` | Where to clone the `ansibullbot` git repository. |
 | `ansibullbot_log_path` | `/var/log/ansibullbot.log` | Path to log file. |
@@ -31,6 +32,8 @@ Role Variables
  | `ansibullbot_receiver_host` | `''` | Database where data is sent. |
  | `ansibullbot_receiver_port` | `''` | Database port. |
  | `ansibullbot_packages` | [see `defaults/main.yml`] | List of packages to install. |
+ | `ansibullbot_slack_message` | `Updating Ansibullbot` | Message posted to Slack when updating Anisbullbot. |
+ | `ansibullbot_slack_token` | `[]` | Slack API toke. This should be stored in an Ansible Vault. |
 
 Dependencies
 ------------

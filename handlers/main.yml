@@ -1,3 +1,11 @@
+- name: send slack message
+  slack:
+    msg: "{{ ansibullbot_slack_message }}"
+    token: "{{ item }}"
+  with_items: "{{ ansibullbot_slack_token }}"
+  tags:
+    - skipci
+
 - name: restart ansibullbot
   systemd:
     name: ansibullbot

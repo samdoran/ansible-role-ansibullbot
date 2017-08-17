@@ -6,7 +6,7 @@
   tags:
     - ansibullbot
     - ansibullbot_selinux
-    - ciskip
+    - skipci
 
 - name: Set hostname
   hostname:
@@ -14,7 +14,7 @@
   tags:
     - ansibullbot
     - ansibullbot_hostname
-    - ciskip
+    - skipci
 
 - name: Install packages
   yum:

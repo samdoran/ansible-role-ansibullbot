@@ -51,4 +51,4 @@
   tags:
     - ansibullbot
     - ansibullbot_service
-    - ciskip
+    - skipci
