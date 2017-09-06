@@ -7,6 +7,9 @@ shippable_token={{ ansibullbot_shippable_token }}
 {% if ansibullbot_slack_url is defined %}
 slack_url={{ ansibullbot_slack_url }}
 {% endif %}
+{% if ansibullbot_notify_email is defined %}
+email={{ ansibullbot_notify_email }}
+{% endif %}
 
 [receiver]
 host={{ ansibullbot_receiver_host }}
