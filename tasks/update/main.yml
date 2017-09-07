@@ -19,3 +19,28 @@
     - ansibullbot
     - ansibullbot_pip
     - ansibullbot_update
+
+- name: Copy ansibullbot.cfg
+  template:
+    src: ansibullbot.cfg.j2
+    dest: ~{{ ansibullbot_user }}/.ansibullbot.cfg
+    owner: "{{ ansibullbot_user }}"
+    group: "{{ ansibullbot_group }}"
+    mode: 0600
+  tags:
+    - ansibullbot
+    - ansibullbot_dotfiles
+    - ansibullbot_update
+
+- name: Copy SystemD service file
+  template:
+    src: systemd_ansibullbot.j2
+    dest: /etc/systemd/system/ansibullbot.service
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart ansibullbot
+  tags:
+    - ansibullbot
+    - ansibullbot_service
+    - ansibullbot_update

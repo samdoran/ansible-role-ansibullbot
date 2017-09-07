@@ -41,6 +41,7 @@
   tags:
     - ansibullbot
     - ansibullbot_service
+    - ansibullbot_update
 
 - name: Start and enable ansibullbot
   systemd:

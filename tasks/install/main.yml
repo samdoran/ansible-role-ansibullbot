@@ -96,6 +96,7 @@
   tags:
     - ansibullbot
     - ansibullbot_pip
+    - ansibullbot_update
 
 - name: Download stopwords
   shell: python -c 'import nltk; nltk.download("punkt")'
