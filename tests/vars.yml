@@ -8,3 +8,6 @@ firewall_allowed_tcp_ports:
   - 22
   - 80
   - 443
+
+# Possible bug workaround for defaults/main.yml being ignore with 2.4.0
+ansibullbot_action: install
