@@ -8,7 +8,6 @@
     - send slack message
     - restart ansibullbot
   tags:
-    - ansibullbot
     - ansibullbot_git
     - ansibullbot_update
 
@@ -16,7 +15,6 @@
   pip:
     requirements: "{{ ansibullbot_clone_path }}/requirements.txt"
   tags:
-    - ansibullbot
     - ansibullbot_pip
     - ansibullbot_update
 
@@ -28,11 +26,10 @@
     group: "{{ ansibullbot_group }}"
     mode: 0600
   tags:
-    - ansibullbot
     - ansibullbot_dotfiles
     - ansibullbot_update
 
-- name: Copy SystemD service file
+- name: Copy ansibullbot service file
   template:
     src: systemd_ansibullbot.j2
     dest: /etc/systemd/system/ansibullbot.service
@@ -41,6 +38,17 @@
     mode: 0644
   notify: restart ansibullbot
   tags:
-    - ansibullbot
+    - ansibullbot_service
+    - ansibullbot_update
+
+- name: Copy ansibullbot-receiver service file
+  template:
+    src: systemd_ansibullbot_receiver.j2
+    dest: /etc/systemd/system/ansibullbot-receiver.service
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart ansibullbot-receiver
+  tags:
     - ansibullbot_service
     - ansibullbot_update
