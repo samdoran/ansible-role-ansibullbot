@@ -4,7 +4,6 @@
   selinux:
     state: disabled
   tags:
-    - ansibullbot
     - ansibullbot_selinux
     - skipci
 
@@ -12,7 +11,6 @@
   hostname:
     name: ansibullbot.eng.ansible.com
   tags:
-    - ansibullbot
     - ansibullbot_hostname
     - skipci
 
@@ -20,23 +18,17 @@
   yum:
     name: "{{ ansibullbot_packages }}"
     state: latest
-  tags:
-    - ansibullbot
 
 - name: Create {{ ansibullbot_group }} group
   group:
     name: "{{ ansibullbot_group }}"
     gid: 1099
-  tags:
-    - ansibullbot
 
 - name: Create {{ ansibullbot_user }} account
   user:
     name: "{{ ansibullbot_user }}"
     home: "{{ ansibullbot_home_dir }}"
     uid: 1099
-  tags:
-    - ansibullbot
 
 - name: Set ssh authorized_keys for centos
   authorized_key:
@@ -44,7 +36,6 @@
     user: centos
   with_items: "{{ botinstance_ssh_keys }}"
   tags:
-    - ansibullbot
     - ssh
 
 - name: Set ssh authorized_keys for {{ ansibullbot_user }}
@@ -53,7 +44,6 @@
     user: "{{ansibullbot_user}}"
   with_items: "{{ botinstance_ssh_keys }}"
   tags:
-    - ansibullbot
     - ssh
 
 - name: Copy dotfiles for root
@@ -64,7 +54,6 @@
     group: root
   with_fileglob: dotfiles/*
   tags:
-    - ansibullbot
     - ansibullbot_dotfiles
 
 - name: Copy ansibullbot.cfg
@@ -74,8 +63,8 @@
     owner: "{{ ansibullbot_user }}"
     group: "{{ ansibullbot_group }}"
     mode: 0600
+  notify: restart ansibullbot
   tags:
-    - ansibullbot
     - ansibullbot_dotfiles
 
 - name: Checkout git repo
@@ -86,7 +75,6 @@
     force: yes
   become_user: "{{ ansibullbot_user }}"
   tags:
-    - ansibullbot
     - ansibullbot_git
     - ansibullbot_update
 
@@ -94,7 +82,6 @@
   pip:
     requirements: "{{ ansibullbot_clone_path }}/requirements.txt"
   tags:
-    - ansibullbot
     - ansibullbot_pip
     - ansibullbot_update
 
@@ -105,8 +92,15 @@
   args:
     creates: ~{{ ansibullbot_user }}/nltk_data
   tags:
-    - ansibullbot
     - ansibullbot_nltk_data
 
-- include: configure-service.yml
-- include: monitoring.yml
+- name: Include ansibullbot_service.yml
+  import_tasks: ansibullbot_service.yml
+
+- name: Include monitoring.yml
+  import_tasks: monitoring.yml
+
+- name: Include ansibullbot_receiver_service.yml
+  import_tasks: ansibullbot_receiver_service.yml
+  when: ansibullbot_receiver_enabled
+

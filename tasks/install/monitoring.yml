@@ -1,12 +1,11 @@
-- name: Install apache
+- name: MONITORING | Install apache
   yum:
     name: httpd
     state: present
   tags:
-    - ansibullbot
     - ansibullbot_monitoring
 
-- name: Copy monitoring web page
+- name: MONITORING | Copy monitoring web page
   copy:
     src: ansibot_status.cgi
     dest: /var/www/cgi-bin/
@@ -14,13 +13,11 @@
     group: apache
     mode: 0755
   tags:
-    - ansibullbot
     - ansibullbot_monitoring
 
-- name: Start and enable httpd
+- name: MONITORING | Start and enable httpd
   service:
     name: httpd
     state: started
   tags:
-    - ansibullbot
     - ansibullbot_monitoring

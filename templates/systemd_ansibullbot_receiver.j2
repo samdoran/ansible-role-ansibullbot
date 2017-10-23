@@ -1,0 +1,18 @@
+#jinja2: trim_blocks: False
+# {{ ansible_managed }}
+[Unit]
+Description=Ansibullbot Receiver
+After=syslog.target
+
+[Service]
+Type=simple
+User={{ ansibullbot_user }}
+Group={{ ansibullbot_group }}
+
+Restart=on-failure
+
+ExecStart={{ ansible_python.executable }} {{ ansibullbot_receiver_bin_path }}
+WorkingDirectory={{ ansibullbot_clone_path }}
+
+[Install]
+WantedBy=multi-user.target

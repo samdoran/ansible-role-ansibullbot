@@ -1,1 +1,4 @@
-- include: "{{ ansibullbot_action }}/main.yml"
+- name: Run Ansibullbot {{ ansibullbot_action }} tasks
+  import_tasks: "{{ ansibullbot_action }}/main.yml"
+  tags:
+    - ansibullbot

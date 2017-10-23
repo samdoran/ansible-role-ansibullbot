@@ -3,11 +3,15 @@
     msg: "{{ ansibullbot_slack_message }}"
     token: "{{ item }}"
   with_items: "{{ ansibullbot_slack_token }}"
-  tags:
-    - skipci
 
 - name: restart ansibullbot
   systemd:
     name: ansibullbot
+    daemon_reload: yes
+    state: restarted
+
+- name: restart ansibullbot-receiver
+  systemd:
+    name: ansibullbot-receiver
     daemon_reload: yes
     state: restarted

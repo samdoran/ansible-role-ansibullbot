@@ -1,4 +1,4 @@
-- name: Create initial log file
+- name: SERVICE | Create initial log file
   copy:
     force: no
     dest: "{{ ansibullbot_log_path }}"
@@ -6,18 +6,17 @@
     owner: "{{ ansibullbot_user }}"
     group: "{{ ansibullbot_group }}"
   tags:
-    - ansibullbot
     - ansibullbot_logs
+    - ansibullbot_service
 
-- name: Setup log rotation
+- name: SERVICE | Setup log rotation
   template:
     src: logrotate_ansibullbot.j2
     dest: /etc/logrotate.d/ansibullbot
   tags:
-    - ansibullbot
     - ansibullbot_logs
 
-- name: Create cron job to cleanup Shippable cache
+- name: SERVICE | Create cron job to cleanup Shippable cache
   cron:
     cron_file: ansibullbot
     hour: 03
@@ -26,11 +25,10 @@
     name: Cleanup Shippable cache
     job: find {{ ansibullbot_cache_dir }} -type f -atime +{{ ansibullbot_cache_days_to_keep }} -exec rm -f '{}' ';'
   tags:
-    - ansibullbot
     - ansibullbot_cache
     - ansibullbot_cron
 
-- name: Copy SystemD service file
+- name: SERVICE | Copy ansibullbot service file
   template:
     src: systemd_ansibullbot.j2
     dest: /etc/systemd/system/ansibullbot.service
@@ -39,17 +37,15 @@
     mode: 0644
   notify: restart ansibullbot
   tags:
-    - ansibullbot
     - ansibullbot_service
     - ansibullbot_update
 
-- name: Start and enable ansibullbot
+- name: SERVICE | Start and enable ansibullbot
   systemd:
     name: ansibullbot
     daemon_reload: yes
     enabled: yes
     state: started
   tags:
-    - ansibullbot
     - ansibullbot_service
     - skipci
