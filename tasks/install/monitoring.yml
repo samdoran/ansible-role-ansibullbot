@@ -6,7 +6,7 @@
     - ansibullbot_monitoring
 
 - name: MONITORING | Copy monitoring web page
-  copy:
+  template:
     src: ansibot_status.cgi
     dest: /var/www/cgi-bin/
     owner: apache
