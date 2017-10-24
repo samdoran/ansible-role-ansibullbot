@@ -39,7 +39,7 @@ def get_process_data():
     return pdata
 
 def get_log_data():
-    cmd = 'tail -n 100 /var/log/ansibullbot.log | fgrep " INFO "'
+    cmd = 'tail -n 100 "{{ ansibullbot_log_path }}" | fgrep " INFO "'
     (rc, so, se) = run_command(cmd)
     lines = []
     for line in so.split('\n'):
@@ -51,7 +51,7 @@ def get_log_data():
         'msg': None
     }
 
-    cmd = "tail -n 1000 /var/log/ansibullbot.log | fgrep 'x-ratelimit-limit' | tail -n1"
+    cmd = 'tail -n 1000 "{{ ansibullbot_log_path }}" | fgrep "x-ratelimit-limit" | tail -n1'
     (rc, so, se) = run_command(cmd)
     if so:
         parts = so.split()
