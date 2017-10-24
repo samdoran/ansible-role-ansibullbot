@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# {{ ansible_managed }}
 
 import cgi
 import os
@@ -68,8 +69,19 @@ def get_log_data():
 
     return (ratelimit, lines)
 
+def get_version_data():
+    cmd = 'git -C "{{ ansibullbot_clone_path }}" log --format="%H" -1'
+
+    (rc, so, se) = run_command(cmd)
+    if rc == 0 and so:
+        commit_hash = so.strip()
+        return commit_hash
+
+    return "unknown"
+
 pdata = get_process_data()
 (ratelimit, loglines) = get_log_data()
+version = get_version_data()
 
 rdata = "Content-type: text/html\n"
 rdata += "\n"
@@ -81,6 +93,7 @@ rdata += "<br>\n"
 rdata += "ratelimit total: %s<br>\n" % ratelimit['total']
 rdata += "ratelimit remaining: %s<br>\n" % ratelimit['remaining']
 rdata += "<br>\n"
+rdata += "current version: %s\n" % version
 rdata += '<br>\n'.join(loglines)
 rdata += "\n"
 
