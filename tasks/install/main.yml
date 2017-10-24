@@ -97,9 +97,6 @@
 - name: Include ansibullbot_service.yml
   import_tasks: ansibullbot_service.yml
 
-- name: Include monitoring.yml
-  import_tasks: monitoring.yml
-
 - name: Include ansibullbot_receiver_service.yml
   import_tasks: ansibullbot_receiver_service.yml
   when: ansibullbot_receiver_enabled
