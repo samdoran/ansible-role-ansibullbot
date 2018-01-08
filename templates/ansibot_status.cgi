@@ -14,7 +14,7 @@ def run_command(args):
 def get_process_data():
     # USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
     #[root@centos-1gb-nyc3-01 cgi-bin]# ps aux | fgrep -i triage.py | egrep ^ansibot
-    #ansibot   1092 18.2 37.4 600984 380548 pts/2   S+   13:53   3:46 
+    #ansibot   1092 18.2 37.4 600984 380548 pts/2   S+   13:53   3:46
     #   python ./triage.py --debug --verbose --force --skip_no_update --daemonize --daemonize_interval=360
     pdata = {
         'pid': None,
@@ -67,7 +67,12 @@ def get_log_data():
             if ridx:
                 ratelimit['remaining'] = parts[ridx+1].replace("'", '').replace(',', '')
 
-    return (ratelimit, lines)
+    # why was bot last restarted?
+    cmd = 'fgrep -B 20 "starting bot" {{ ansibullbot_log_path }} | tail -n 21'
+    (rc, so, se) = run_command(cmd)
+    restarts = so.split('\n')
+
+    return (ratelimit, lines, restarts)
 
 def get_version_data():
     cmd = 'git -C "{{ ansibullbot_clone_path }}" log --format="%H" -1'
@@ -80,7 +85,7 @@ def get_version_data():
     return "unknown"
 
 pdata = get_process_data()
-(ratelimit, loglines) = get_log_data()
+(ratelimit, loglines, restarts) = get_log_data()
 version = get_version_data()
 
 rdata = "Content-type: text/html\n"
@@ -94,7 +99,11 @@ rdata += "ratelimit total: %s<br>\n" % ratelimit['total']
 rdata += "ratelimit remaining: %s<br>\n" % ratelimit['remaining']
 rdata += "<br>\n"
 rdata += "current version: %s\n" % version
+rdata += "#####################################################################"
 rdata += '<br>\n'.join(loglines)
+rdata += "\n"
+rdata += "#####################################################################"
+rdata += '<br>\n'.join(restarts)
 rdata += "\n"
 
 # force error on full disk
