@@ -99,12 +99,13 @@ rdata += "ratelimit total: %s<br>\n" % ratelimit['total']
 rdata += "ratelimit remaining: %s<br>\n" % ratelimit['remaining']
 rdata += "<br>\n"
 rdata += "current version: %s\n" % version
-rdata += "#####################################################################"
+rdata += "<br>\n"
+rdata += "################################ INFO LOG ###########################<br>\n"
 rdata += '<br>\n'.join(loglines)
-rdata += "\n"
-rdata += "#####################################################################"
+rdata += "<br>\n"
+rdata += "################################ TRACEBACKS #########################<br>\n"
 rdata += '<br>\n'.join(restarts)
-rdata += "\n"
+rdata += "<br>\n"
 
 # force error on full disk
 if int(pdata['disk'].replace('%', '')) > 98:
