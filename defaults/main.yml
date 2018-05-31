@@ -43,6 +43,7 @@ ansibullbot_packages:
   - python2-pip
   - gcc
   - python-devel
+  - python-epdb
 
 ansibullbot_recevier_pip_packages:
   - Flask
