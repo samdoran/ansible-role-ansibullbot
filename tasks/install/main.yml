@@ -18,17 +18,23 @@
   yum:
     name: "{{ ansibullbot_packages }}"
     state: latest
+  tags:
+    - packages
 
 - name: Create {{ ansibullbot_group }} group
   group:
     name: "{{ ansibullbot_group }}"
     gid: 1099
+  tags:
+    - user
 
 - name: Create {{ ansibullbot_user }} account
   user:
     name: "{{ ansibullbot_user }}"
     home: "{{ ansibullbot_home_dir }}"
     uid: 1099
+  tags:
+    - user
 
 - name: Set ssh authorized_keys for centos
   authorized_key:
