@@ -2,6 +2,7 @@
 # {{ ansible_managed }}
 
 import cgi
+import glob
 import os
 import sys
 import subprocess
@@ -10,6 +11,7 @@ def run_command(args):
     p = subprocess.Popen(args, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True)
     (so, se) = p.communicate()
     return (p.returncode, so, se)
+
 
 def get_process_data():
     # USER       PID %CPU %MEM    VSZ   RSS TTY      STAT START   TIME COMMAND
@@ -38,12 +40,61 @@ def get_process_data():
 
     return pdata
 
+
+def _get_log_data():
+
+    LOGDIR='/var/log'
+    logfiles = sorted(glob.glob('%s/ansibullbot*' % LOGDIR))
+    log_lines = []
+
+    for lf in logfiles:
+        if lf.endswith('.log'):
+            with open(lf, 'r') as f:
+                log_lines = log_lines + f.readlines()
+
+    # trim out and DEBUG lines
+    log_info = [x.rstrip() for x in log_lines if ' INFO ' in x]
+
+    # each time the bot starts, it's possibly because of a traceback
+    bot_starts = []
+    for idx,x in enumerate(log_lines):
+        if 'starting bot' in x:
+            bot_starts.append(idx)
+
+    # pull out the entire traceback(s) and the relevant issues(s)
+    tracebacks = []
+    for bs in bot_starts:
+        this_issue = None
+        this_traceback = None
+        for idx,x in enumerate(log_lines):
+            if 'starting triage' in x:
+                this_issue = x
+                continue
+            if this_issue and x.endswith('Traceback (most recent call last):'):
+                this_traceback = [x]
+                continue
+            if this_traceback:
+                this_traceback.append(x)
+            if idx == bs:
+                break
+
+        # only keep things that were actually tracebacks
+        if this_traceback is not None:
+            if 'Exception' in this_traceback[-2]:
+                tracebacks.append((this_issue, this_traceback))
+
+    return (log_info[-1000:], tracebacks)
+
+
 def get_log_data():
+
+    '''
     cmd = 'tail -n 100 "{{ ansibullbot_log_path }}" | fgrep " INFO "'
     (rc, so, se) = run_command(cmd)
     lines = []
     for line in so.split('\n'):
         lines.append(line)
+    '''
 
     ratelimit = {
         'total': None,
@@ -67,12 +118,17 @@ def get_log_data():
             if ridx:
                 ratelimit['remaining'] = parts[ridx+1].replace("'", '').replace(',', '')
 
+    '''
     # why was bot last restarted?
     cmd = 'fgrep -B 20 "starting bot" {{ ansibullbot_log_path }} | tail -n 21'
     (rc, so, se) = run_command(cmd)
     restarts = so.split('\n')
+    '''
+
+    lines,restarts = _get_log_data()
 
     return (ratelimit, lines, restarts)
+
 
 def get_version_data():
     cmd = 'git -C "{{ ansibullbot_clone_path }}" log --format="%H" -1'
