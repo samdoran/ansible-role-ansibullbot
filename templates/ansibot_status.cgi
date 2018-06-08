@@ -81,7 +81,7 @@ def _get_log_data():
         # only keep things that were actually tracebacks
         if this_traceback is not None:
             if 'Exception' in this_traceback[-2]:
-                tracebacks.append((this_issue, this_traceback))
+                tracebacks.append([this_issue] + this_traceback))
 
     return (log_info[-1000:], tracebacks)
 
