@@ -22,6 +22,7 @@ def get_process_data():
         'pid': None,
         'cpu': None,
         'mem': None,
+        'disk': '0',
     }
     cmd = 'ps aux | fgrep -i triage_ansible.py | egrep ^ansibot'
     (rc, so, se) = run_command(cmd)
@@ -81,20 +82,12 @@ def _get_log_data():
         # only keep things that were actually tracebacks
         if this_traceback is not None:
             if 'Exception' in this_traceback[-2]:
-                tracebacks.append([this_issue] + this_traceback))
+                tracebacks.append([this_issue] + this_traceback)
 
     return (log_info[-1000:], tracebacks)
 
 
 def get_log_data():
-
-    '''
-    cmd = 'tail -n 100 "{{ ansibullbot_log_path }}" | fgrep " INFO "'
-    (rc, so, se) = run_command(cmd)
-    lines = []
-    for line in so.split('\n'):
-        lines.append(line)
-    '''
 
     ratelimit = {
         'total': None,
@@ -117,13 +110,6 @@ def get_log_data():
             ridx = parts.index("'x-ratelimit-remaining':")
             if ridx:
                 ratelimit['remaining'] = parts[ridx+1].replace("'", '').replace(',', '')
-
-    '''
-    # why was bot last restarted?
-    cmd = 'fgrep -B 20 "starting bot" {{ ansibullbot_log_path }} | tail -n 21'
-    (rc, so, se) = run_command(cmd)
-    restarts = so.split('\n')
-    '''
 
     lines,restarts = _get_log_data()
 
