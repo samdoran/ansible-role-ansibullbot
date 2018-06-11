@@ -7,7 +7,7 @@
 
 - name: MONITORING | Copy monitoring web page
   copy:
-    src: "{{ ansibullbot_clone_path + '/' + 'scripts' + '/' + 'ansibot_status.cgi' }}"
+    src: "{{ ansibullbot_clone_path ~ '/scripts/ansibot_status.cgi' }}"
     dest: /var/www/cgi-bin/
     remote_src: True
     owner: apache
