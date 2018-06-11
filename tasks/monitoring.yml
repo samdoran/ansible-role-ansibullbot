@@ -6,9 +6,10 @@
     - ansibullbot_monitoring
 
 - name: MONITORING | Copy monitoring web page
-  template:
-    src: ansibot_status.cgi
+  copy:
+    src: "{{ ansibullbot_clone_path + '/' + 'scripts' + '/' + 'ansibot_status.cgi' }}"
     dest: /var/www/cgi-bin/
+    remote_src: True
     owner: apache
     group: apache
     mode: 0755
