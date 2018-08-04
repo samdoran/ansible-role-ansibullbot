@@ -12,9 +12,34 @@
     remote_src: True
     owner: apache
     group: apache
-    mode: 0755
+    mode: '0755'
   tags:
     - ansibullbot_monitoring
+
+- name: MONITORING | Add httpd user account to {{ ansibullbot_group }} group
+  user:
+    name: apache
+    groups: "{{ ansibullbot_group }}"
+    append: yes
+  tags:
+    - ansibullbot_monitoring
+
+- name: MONITORING | Set permissions on ansibullbot home
+  file:
+    path: "{{ ansibullbot_home_dir }}"
+    owner: "{{ ansibullbot_user }}"
+    group: "{{ ansibullbot_group }}"
+    mode: 'g+rx'
+  tags:
+    - ansibullbot_monitoring
+
+- name: MONITORING | Set permissions on ansibullbot code checkout
+  file:
+    path: "{{ ansibullbot_clone_path }}"
+    owner: "{{ ansibullbot_user }}"
+    group: "{{ ansibullbot_group }}"
+    recurse: yes
+    mode: 'g+r'
 
 - name: MONITORING | Start and enable httpd
   service:
