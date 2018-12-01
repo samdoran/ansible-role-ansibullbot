@@ -1,6 +1,6 @@
 - name: SERVICE | Create initial log file
   copy:
-    force: no
+    force: false
     dest: "{{ ansibullbot_log_path }}"
     content: ''
     owner: "{{ ansibullbot_user }}"
@@ -43,8 +43,8 @@
 - name: SERVICE | Start and enable ansibullbot
   systemd:
     name: ansibullbot
-    daemon_reload: yes
-    enabled: yes
+    daemon_reload: true
+    enabled: true
     state: started
   tags:
     - ansibullbot_service

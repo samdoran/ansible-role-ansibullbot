@@ -9,7 +9,7 @@
   copy:
     src: "{{ ansibullbot_clone_path ~ '/scripts/ansibot_status.cgi' }}"
     dest: /var/www/cgi-bin/
-    remote_src: True
+    remote_src: true
     owner: apache
     group: apache
     mode: '0755'
@@ -20,7 +20,7 @@
   user:
     name: apache
     groups: "{{ ansibullbot_group }}"
-    append: yes
+    append: true
   tags:
     - ansibullbot_monitoring
 
@@ -38,7 +38,7 @@
     path: "{{ ansibullbot_clone_path }}"
     owner: "{{ ansibullbot_user }}"
     group: "{{ ansibullbot_group }}"
-    recurse: yes
+    recurse: true
     mode: 'g+r'
 
 - name: MONITORING | Start and enable httpd

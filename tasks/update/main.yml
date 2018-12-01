@@ -2,7 +2,7 @@
   git:
     repo: "{{ ansibullbot_repo_url }}"
     dest: "{{ ansibullbot_clone_path }}"
-    force: yes
+    force: true
   become_user: "{{ ansibullbot_user }}"
   notify:
     - send slack message

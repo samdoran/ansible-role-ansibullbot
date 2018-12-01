@@ -7,11 +7,11 @@
 - name: restart ansibullbot
   systemd:
     name: ansibullbot
-    daemon_reload: yes
+    daemon_reload: true
     state: restarted
 
 - name: restart ansibullbot-receiver
   systemd:
     name: ansibullbot-receiver
-    daemon_reload: yes
+    daemon_reload: true
     state: restarted

@@ -8,7 +8,7 @@ ansibullbot_log_path: /var/log/ansibullbot.log
 ansibullbot_cache_dir: "{{ ansibullbot_home_dir }}/.ansibullbot/cache/shippable.runs/.raw"
 
 # Ansibullbot receiver
-ansibullbot_receiver_enabled: no
+ansibullbot_receiver_enabled: false
 ansibullbot_receiver_bin_path: "{{ ansibullbot_clone_path }}/scripts/ansibot_receiver.py"
 
 # Slack notice
@@ -27,7 +27,7 @@ ansibullbot_options:
 
 
 # Settings for ansibullbot.cfg
-ansibullbot_debug: True
+ansibullbot_debug: true
 ansibullbot_github_username: ansibot
 ansibullbot_github_password: ''
 ansibullbot_github_token: ''

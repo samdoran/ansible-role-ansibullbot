@@ -1,4 +1,4 @@
-ansibullbot_receiver_enabled: yes
+ansibullbot_receiver_enabled: true
 
 botinstance_ssh_keys:
   - name: testkey
