@@ -35,11 +35,9 @@ Role Variables
  | `ansibullbot_packages` | [see `defaults/main.yml`] | List of packages to install. |
  | `ansibullbot_slack_message` | `Updating Ansibullbot` | Message posted to Slack when updating Anisbullbot. |
  | `ansibullbot_slack_token` | `[]` | Slack API toke. This should be stored in an Ansible Vault. |
+ | `ansibullbot_sentry_url` | `~` | URL of the Sentry server. |
  | `ansibullbot_sentry_env` | `prod` | Sentry environment |
  | `ansibullbot_sentry_trace` | `true` | Whether or not to collect trace information and send to Sentry. |
- | `ansibullbot_sentry_key` | `~` | Sentry key used in URL |
- | `ansibullbot_sentry_secret` | `~` | Sentry secret used in URL |
- | `ansibullbot_sentry_project` | `~` | Sentry project used in URL |
 
 Dependencies
 ------------

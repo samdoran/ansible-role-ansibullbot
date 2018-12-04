@@ -16,8 +16,8 @@ host={{ ansibullbot_receiver_host }}
 port={{ ansibullbot_receiver_port }}
 
 [sentry]
-{% if ansibullbot_sentry_secret  is not none and ansibullbot_sentry_project is not none %}
-dsn=https://{% if ansibullbot_sentry_key is not none %}{{ ansibullbot_sentry_key }}:{% endif %}{{ ansibullbot_sentry_secret }}@sentry.io/{{ ansibullbot_sentry_project }}
+{% if ansibullbot_sentry_url is not none %}
+dsn={{ ansibullbot_sentry_url }}
 {% endif %}
 env={{ ansibullbot_sentry_env }}
 trace={{ ansibullbot_sentry_trace | string | capitalize }}

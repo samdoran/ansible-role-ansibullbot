@@ -49,8 +49,6 @@ ansibullbot_recevier_pip_packages:
   - Flask
   - flask_pymongo
 
+ansibullbot_sentry_url: ~
 ansibullbot_sentry_env: prod
 ansibullbot_sentry_trace: true
-ansibullbot_sentry_key: ~
-ansibullbot_sentry_secret: ~
-ansibullbot_sentry_project: ~
