@@ -23,7 +23,7 @@ Role Variables
 | `ansibullbot_clone_path` | `{{ ansibullbot_home_dir }}/ansibullbot` | Where to clone the `ansibullbot` git repository. |
 | `ansibullbot_log_path` | `/var/log/ansibullbot.log` | Path to log file. |
 | `ansibullbot_cache_dir` | `{{ ansibullbot_home_dir }}/.ansibullbot/cache/shippable.runs/.raw` | Where cache files are stored. Used for cleaning up old cache files. |
-| `ansibullbot_enable_receiver` | `no` | Whether or not to enaable the `ansibullbot_receiver` service. Requires  |
+| `ansibullbot_enable_receiver` | `false` | Whether or not to enaable the `ansibullbot_receiver` service. Requires  |
 | `ansibullbot_cache_days_to_keep` | `30` | How many days wort of cache files to keep. |
 | `ansibullbot_debug` | `True` | Whether or not to enable debugging. |
 | `ansibullbot_github_username` | `ansibot` | GitHub account used for authenticating to the GitHub API. |
@@ -35,6 +35,11 @@ Role Variables
  | `ansibullbot_packages` | [see `defaults/main.yml`] | List of packages to install. |
  | `ansibullbot_slack_message` | `Updating Ansibullbot` | Message posted to Slack when updating Anisbullbot. |
  | `ansibullbot_slack_token` | `[]` | Slack API toke. This should be stored in an Ansible Vault. |
+ | `ansibullbot_sentry_env` | `prod` | Sentry environment |
+ | `ansibullbot_sentry_trace` | `true` | Whether or not to collect trace information and send to Sentry. |
+ | `ansibullbot_sentry_key` | `~` | Sentry key used in URL |
+ | `ansibullbot_sentry_secret` | `~` | Sentry secret used in URL |
+ | `ansibullbot_sentry_project` | `~` | Sentry project used in URL |
 
 Dependencies
 ------------
