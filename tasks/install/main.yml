@@ -100,10 +100,8 @@
   tags:
     - ansibullbot_nltk_data
 
-- name: Include ansibullbot_service.yml
-  import_tasks: ansibullbot_service.yml
+- import_tasks: ansibullbot_service.yml
 
-- name: Include ansibullbot_receiver_service.yml
-  import_tasks: ansibullbot_receiver_service.yml
+- import_tasks: ansibullbot_receiver_service.yml
   when: ansibullbot_receiver_enabled
 

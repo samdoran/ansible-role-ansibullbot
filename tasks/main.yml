@@ -1,7 +1,5 @@
-- name: Run Ansibullbot {{ ansibullbot_action }} tasks
-  import_tasks: "{{ ansibullbot_action }}/main.yml"
+- include_tasks: "{{ ansibullbot_action }}/main.yml"
   tags:
     - ansibullbot
 
-- name: Include monitoring.yml
-  import_tasks: monitoring.yml
+- import_tasks: monitoring.yml
