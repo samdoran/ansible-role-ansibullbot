@@ -1,0 +1,27 @@
+- name: Converge
+  hosts: all
+  become: true
+
+  vars_files:
+    - vars.yml
+
+  tasks:
+    - name: Create centos group
+      group:
+        name: centos
+
+    - name: Create centos user
+      user:
+        name: centos
+
+    - import_role:
+        name: repo_epel
+
+    - import_role:
+        name: firewall
+
+    - import_role:
+        name: caddy
+
+    - import_role:
+        name: ansibullbot

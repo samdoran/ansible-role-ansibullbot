@@ -9,5 +9,9 @@ firewall_allowed_tcp_ports:
   - 80
   - 443
 
-# Possible bug workaround for defaults/main.yml being ignored with 2.4.0
-ansibullbot_action: install
+caddy_root: /usr/share/caddy
+caddy_config_path: /etc/caddy
+caddy_user: caddy
+caddy_group: caddy
+caddy_download_custom_build: true
+caddy_systemd_protect_home: 'false'

@@ -1,5 +1,0 @@
-- src: samdoran.repo-epel
-  name: repo-epel
-
-- src: samdoran.firewall
-  name: firewall
