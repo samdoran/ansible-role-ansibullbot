@@ -1,4 +1,5 @@
 ansibullbot_receiver_enabled: true
+ansibullbot_url: http://localhost
 
 botinstance_ssh_keys:
   - name: testkey

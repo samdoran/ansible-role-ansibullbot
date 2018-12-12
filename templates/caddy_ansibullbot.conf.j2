@@ -1,4 +1,4 @@
-https://{{ ansibullbot_fqdn }}
+{{ ansibullbot_url }}
 root {{ caddy_root }}
 proxy /schemavalidator/ 172.20.0.4:5000
 proxy /schemavalidator/static/ 172.20.0.4:5000

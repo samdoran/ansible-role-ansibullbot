@@ -7,6 +7,7 @@ ansibullbot_clone_path: "{{ ansibullbot_home_dir }}/ansibullbot"
 ansibullbot_log_path: /var/log/ansibullbot.log
 ansibullbot_cache_dir: "{{ ansibullbot_home_dir }}/.ansibullbot/cache/shippable.runs/.raw"
 ansibullbot_fqdn: ansibullbot.eng.ansible.com
+ansibullbot_url: https://{{ ansibullbot_fqdn }}
 
 # Ansibullbot receiver
 ansibullbot_receiver_enabled: false
