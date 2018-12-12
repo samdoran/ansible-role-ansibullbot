@@ -1,8 +1,5 @@
 - src: samdoran.repo_epel
   name: repo_epel
 
-- src: samdoran.firewall
-  name: firewall
-
 - src: samdoran.caddy
   name: caddy

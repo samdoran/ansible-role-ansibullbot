@@ -18,9 +18,6 @@
         name: repo_epel
 
     - import_role:
-        name: firewall
-
-    - import_role:
         name: caddy
 
     - import_role:
