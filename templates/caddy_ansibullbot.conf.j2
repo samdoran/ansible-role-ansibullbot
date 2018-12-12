@@ -1,13 +1,14 @@
-ansibullbot.eng.ansible.com:440
+https://{{ ansibullbot_fqdn }}
+root {{ caddy_root }}
+proxy /schemavalidator/ 172.20.0.4:5000
+proxy /schemavalidator/static/ 172.20.0.4:5000
 
+cgi {
+    match /cgi-bin/ansibot_status.cgi
+    exec {root}/cgi-bin/ansibot_status.cgi
+}
 
-/schemavalidator/ 172.20.0.4:5000
-
-# <VirtualHost *:80>
-#     ProxyPreserveHost On
-#     ProxyPass /schemavalidator/ http://172.20.0.4:5000/
-#     ProxyPassReverse /schemavalidator/ http://172.20.0.4:5000/
-#
-#     ProxyPass /schemavalidator/static/ http://172.20.0.4:5000/
-#     ProxyPassReverse /schemavalidator/static/ http://172.20.0.4:5000/
-# </VirtualHost>
+cgi {
+    match /status
+    exec {root}/cgi-bin/ansibot_status.cgi
+}

@@ -1,20 +1,36 @@
-- name: MONITORING | Copy monitoring web page
+- name: MONITORING | Create web directories
+  file:
+    path: "{{ item.path | default(item) }}"
+    state: directory
+    owner: "{{ item.owner | default('root') }}"
+    group: "{{ item.group | default('root') }}"
+  loop:
+    - path: "{{ caddy_root }}/cgi-bin"
+    - path: "{{ caddy_root }}/html"
+    - path: "{{ caddy_root }}/html/ansibot/metadata"
+      owner: "{{ ansibullbot_user }}"
+      group: "{{ ansibullbot_group }}"
+  tags:
+    - ansibullbot_monitoring
+
+- name: MONITORING | Copy monitoring script
   copy:
     src: "{{ ansibullbot_clone_path ~ '/scripts/ansibot_status.cgi' }}"
-    dest: /var/www/cgi-bin/
+    dest: "{{ caddy_root }}/cgi-bin/ansibot_status.cgi"
     remote_src: true
-    owner: apache
-    group: apache
+    owner: root
+    group: root
     mode: '0755'
   tags:
     - ansibullbot_monitoring
 
-- name: MONITORING | Add httpd user account to {{ ansibullbot_group }} group
+- name: MONITORING | Add caddy user account to {{ ansibullbot_group }} group
   user:
-    name: apache
+    name: "{{ caddy_user }}"
     groups: "{{ ansibullbot_group }}"
     append: true
   tags:
+    - ansibullbot
     - ansibullbot_monitoring
 
 - name: MONITORING | Set permissions on ansibullbot home
@@ -24,6 +40,7 @@
     group: "{{ ansibullbot_group }}"
     mode: 'g+rx'
   tags:
+    - ansibullbot
     - ansibullbot_monitoring
 
 - name: MONITORING | Set permissions on ansibullbot code checkout
@@ -34,9 +51,11 @@
     recurse: true
     mode: 'g+r'
 
-- name: MONITORING | Start and enable httpd
-  service:
-    name: httpd
-    state: started
+- name: MONITORING | Copy Caddy config file
+  template:
+    src: caddy_ansibullbot.conf.j2
+    dest: "{{ caddy_config_path }}/conf.d/ansibullbot.conf"
+  notify: restart caddy
   tags:
+    - ansibullbot
     - ansibullbot_monitoring

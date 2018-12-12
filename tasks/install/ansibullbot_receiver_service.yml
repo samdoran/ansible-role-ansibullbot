@@ -7,16 +7,17 @@
     mode: 0644
   notify: restart ansibullbot-receiver
   tags:
+    - ansibullbot
     - ansibullbot_receiver
     - ansibullbot_service
     - ansibullbot_update
 
 - name: RECIVER | Install ansibullbot_receievr pip packages
   pip:
-    name: "{{ item }}"
+    name: "{{ ansibullbot_recevier_pip_packages }}"
     state: present
-  with_items: "{{ ansibullbot_recevier_pip_packages }}"
   tags:
+    - ansibullbot
     - ansibullbot_receiver
     - ansibullbot_service
     - ansibullbot_update
@@ -28,6 +29,7 @@
     enabled: true
     state: started
   tags:
+    - ansibullbot
     - ansibullbot_service
     - ansibullbot_receiver
-    - skipci
+    - notest

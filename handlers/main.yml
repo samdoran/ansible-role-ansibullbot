@@ -2,13 +2,17 @@
   slack:
     msg: "{{ ansibullbot_slack_message }}"
     token: "{{ item }}"
-  with_items: "{{ ansibullbot_slack_token }}"
+  loop: "{{ ansibullbot_slack_token }}"
+  tags:
+    - notest
 
 - name: restart ansibullbot
   systemd:
     name: ansibullbot
     daemon_reload: true
     state: restarted
+  tags:
+    - notest
 
 - name: restart ansibullbot-receiver
   systemd:

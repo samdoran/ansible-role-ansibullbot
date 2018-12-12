@@ -1,24 +1,28 @@
 # Only needed due monitoring via CGI script. Once that is changed, SELinux
 # can be set to Enforcing again.
-- name: Disable SELinux
+- name: Enable SELinux
   selinux:
-    state: disabled
+    state: enforcing
+    policy: targeted
   tags:
+    - ansibullbot
     - ansibullbot_selinux
-    - skipci
+    - notest
 
 - name: Set hostname
   hostname:
-    name: ansibullbot.eng.ansible.com
+    name: "{{ ansibullbot_fqdn }}"
   tags:
+    - ansibullbot
     - ansibullbot_hostname
-    - skipci
+    - notest
 
 - name: Install packages
   yum:
     name: "{{ ansibullbot_packages }}"
     state: latest
   tags:
+    - ansibullbot
     - packages
 
 - name: Create {{ ansibullbot_group }} group
@@ -26,6 +30,7 @@
     name: "{{ ansibullbot_group }}"
     gid: 1099
   tags:
+    - ansibullbot
     - user
 
 - name: Create {{ ansibullbot_user }} account
@@ -34,22 +39,25 @@
     home: "{{ ansibullbot_home_dir }}"
     uid: 1099
   tags:
+    - ansibullbot
     - user
 
 - name: Set ssh authorized_keys for centos
   authorized_key:
     key: "{{ item.key_material }}"
     user: centos
-  with_items: "{{ botinstance_ssh_keys }}"
+  loop: "{{ botinstance_ssh_keys }}"
   tags:
+    - ansibullbot
     - ssh
 
 - name: Set ssh authorized_keys for {{ ansibullbot_user }}
   authorized_key:
     key: "{{ item.key_material }}"
     user: "{{ansibullbot_user}}"
-  with_items: "{{ botinstance_ssh_keys }}"
+  loop: "{{ botinstance_ssh_keys }}"
   tags:
+    - ansibullbot
     - ssh
 
 - name: Copy dotfiles for root
@@ -60,6 +68,7 @@
     group: root
   with_fileglob: dotfiles/*
   tags:
+    - ansibullbot
     - ansibullbot_dotfiles
 
 - name: Copy ansibullbot.cfg
@@ -71,6 +80,7 @@
     mode: 0600
   notify: restart ansibullbot
   tags:
+    - ansibullbot
     - ansibullbot_dotfiles
 
 - name: Checkout git repo
@@ -81,6 +91,7 @@
     force: true
   become_user: "{{ ansibullbot_user }}"
   tags:
+    - ansibullbot
     - ansibullbot_git
     - ansibullbot_update
 
@@ -88,6 +99,7 @@
   pip:
     requirements: "{{ ansibullbot_clone_path }}/requirements.txt"
   tags:
+    - ansibullbot
     - ansibullbot_pip
     - ansibullbot_update
 
@@ -98,10 +110,10 @@
   args:
     creates: ~{{ ansibullbot_user }}/nltk_data
   tags:
+    - ansibullbot
     - ansibullbot_nltk_data
 
 - import_tasks: ansibullbot_service.yml
 
 - import_tasks: ansibullbot_receiver_service.yml
   when: ansibullbot_receiver_enabled
-

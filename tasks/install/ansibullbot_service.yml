@@ -6,6 +6,7 @@
     owner: "{{ ansibullbot_user }}"
     group: "{{ ansibullbot_group }}"
   tags:
+    - ansibullbot
     - ansibullbot_logs
     - ansibullbot_service
 
@@ -14,6 +15,7 @@
     src: logrotate_ansibullbot.j2
     dest: /etc/logrotate.d/ansibullbot
   tags:
+    - ansibullbot
     - ansibullbot_logs
 
 - name: SERVICE | Create cron job to cleanup Shippable cache
@@ -25,6 +27,7 @@
     name: Cleanup Shippable cache
     job: find {{ ansibullbot_cache_dir }} -type f -atime +{{ ansibullbot_cache_days_to_keep }} -exec rm -f '{}' ';'
   tags:
+    - ansibullbot
     - ansibullbot_cache
     - ansibullbot_cron
 
@@ -37,6 +40,7 @@
     mode: 0644
   notify: restart ansibullbot
   tags:
+    - ansibullbot
     - ansibullbot_service
     - ansibullbot_update
 
@@ -47,5 +51,6 @@
     enabled: true
     state: started
   tags:
+    - ansibullbot
     - ansibullbot_service
-    - skipci
+    - notest

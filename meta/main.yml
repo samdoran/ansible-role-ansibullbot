@@ -1,4 +1,5 @@
 galaxy_info:
+  role_name: ansibullbot
   author: Sam Doran
   description: Ansible issue and pull request bot
   company: Ansible by Red Hat
@@ -6,9 +7,9 @@ galaxy_info:
   min_ansible_version: 2.4
 
   platforms:
-  - name: EL
-    versions:
-      - 7
+    - name: EL
+      versions:
+        - 7
 
   galaxy_tags:
     - system

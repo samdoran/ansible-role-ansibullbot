@@ -42,14 +42,14 @@ Role Variables
 Dependencies
 ------------
 
-- samdoran.repo-epel
+- samdoran.repo_epel
 
 Example Playbook
 ----------------
 
     - hosts: all
       roles:
-          - samdoran.repo-epel
+          - samdoran.repo_epel
           - samdoran.firewall
           - samdoran.fail2ban
           - samdoran.ansibullbot

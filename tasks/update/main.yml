@@ -52,3 +52,23 @@
   tags:
     - ansibullbot_service
     - ansibullbot_update
+
+- name: Copy monitoring script
+  copy:
+    src: "{{ ansibullbot_clone_path ~ '/scripts/ansibot_status.cgi' }}"
+    dest: "{{ caddy_root }}/cgi-bin/ansibot_status.cgi"
+    remote_src: true
+    owner: root
+    group: root
+    mode: '0755'
+  tags:
+    - ansibullbot_monitoring
+
+- name: Copy Caddy config file
+  template:
+    src: caddy_ansibullbot.conf.j2
+    dest: "{{ caddy_config_path }}/conf.d/ansibullbot.conf"
+  notify: restart caddy
+  tags:
+    - ansibullbot
+    - ansibullbot_monitoring

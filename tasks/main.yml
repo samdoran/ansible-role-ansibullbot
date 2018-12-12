@@ -1,5 +1,17 @@
 - include_tasks: "{{ ansibullbot_action }}/main.yml"
   tags:
     - ansibullbot
+    - ansibullbot_cache
+    - ansibullbot_cron
+    - ansibullbot_dotfiles
+    - ansibullbot_git
+    - ansibullbot_logs
+    - ansibullbot_nltk_data
+    - ansibullbot_pip
+    - ansibullbot_receiver
+    - ansibullbot_service
+    - ansibullbot_update
+    - ssh
+    - user
 
 - import_tasks: monitoring.yml
