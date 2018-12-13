@@ -6,10 +6,23 @@
     group: "{{ item.group | default('root') }}"
   loop:
     - path: "{{ caddy_root }}/cgi-bin"
-    - path: "{{ caddy_root }}/html"
-    - path: "{{ caddy_root }}/html/ansibot/metadata"
+    - path: "{{ caddy_root }}/ansibot/html"
+    - path: "{{ caddy_root }}/ansibot/html/metadata"
       owner: "{{ ansibullbot_user }}"
       group: "{{ ansibullbot_group }}"
+  tags:
+    - ansibullbot_monitoring
+
+- name: MONITORING | Copy HTML files
+  copy:
+    src: "{{ item }}"
+    dest: "{{ caddy_root }}/ansibot/html/{{ item }}"
+    owner: root
+    group: root
+    mode: 0644
+  loop:
+    - index.html
+    - error.html
   tags:
     - ansibullbot_monitoring
 
@@ -55,7 +68,7 @@
   template:
     src: caddy_ansibullbot.conf.j2
     dest: "{{ caddy_config_path }}/conf.d/ansibullbot.conf"
-  notify: restart caddy
+  notify: reload caddy
   tags:
     - ansibullbot
     - ansibullbot_monitoring

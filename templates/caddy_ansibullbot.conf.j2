@@ -1,14 +1,34 @@
 {{ ansibullbot_url }}
-root {{ caddy_root }}
-proxy /schemavalidator/ 172.20.0.4:5000
-proxy /schemavalidator/static/ 172.20.0.4:5000
+root {{ caddy_root }}/ansibot/html
+log / {{ caddy_log_path }}/ansibot_access.log
+errors {{ caddy_log_path }}/ansibot_error.log {
+    404 error.html
+}
+status 404 error.html
+
+proxy /schemavalidator 172.20.0.4:5000
+
+# Prevent access to dotfiles
+rewrite {
+    if {path} starts_with .
+    to error.html
+}
+
+rewrite /ansibot/metadata/byfile_sorted.html /metadata/byfile_sorted.html
+rewrite /byfile /metadata/byfile_sorted.html
 
 cgi {
     match /cgi-bin/ansibot_status.cgi
-    exec {root}/cgi-bin/ansibot_status.cgi
+    exec {{ caddy_root }}/cgi-bin/ansibot_status.cgi
 }
 
 cgi {
     match /status
-    exec {root}/cgi-bin/ansibot_status.cgi
+    exec {{ caddy_root }}/cgi-bin/ansibot_status.cgi
 }
+
+{% if 'dev' in inventory_hostname %}
+tls {
+    ca https://acme-staging-v02.api.letsencrypt.org/directory
+}
+{% endif %}

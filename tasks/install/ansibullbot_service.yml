@@ -31,6 +31,18 @@
     - ansibullbot_cache
     - ansibullbot_cron
 
+- name: SERVICE | Create cron job to generate issues by file
+  cron:
+    cron_file: ansibullbot
+    minute: 0
+    hour: '*/3'
+    user: "{{ ansibullbot_user }}"
+    name: Generate issues by file
+    job: 'cd {{ ansibullbot_clone_path }}/scripts/; PYTHONPATH=. python scripts/generate_issues_by_file.py {{ caddy_root }}/html/ansibot/metadata/byfile_sorted.html'
+  tags:
+    - ansibullbot
+    - ansibullbot_cron
+
 - name: SERVICE | Copy ansibullbot service file
   template:
     src: systemd_ansibullbot.j2
