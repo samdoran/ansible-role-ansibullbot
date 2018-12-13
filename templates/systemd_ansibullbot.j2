@@ -14,9 +14,9 @@ Restart=on-failure
 StandardOutput=null
 StandardError=null
 
-ExecStartPost=-/bin/sh -c "{{ ansibullbot_clone_path }}/scripts/slack-notice.py -m 'I just started'"
+ExecStartPost=-/bin/sh -c "{{ ansibullbot_clone_path }}/scripts/slack-notice.py -m '{{ ansibullbot_start_message }}'"
 ExecStart={{ ansibullbot_clone_path }}/triage_ansible.py {% for option in ansibullbot_options %}--{{ option }}{% if not loop.last %} {% endif %}{% endfor %}
-ExecStopPost=-/bin/sh -c "{{ ansibullbot_clone_path }}/scripts/slack-notice.py -m 'I just stopped' -e"
+ExecStopPost=-/bin/sh -c "{{ ansibullbot_clone_path }}/scripts/slack-notice.py -m '{{ ansibullbot_stop_message }}' -e"
 WorkingDirectory={{ ansibullbot_clone_path }}
 
 [Install]

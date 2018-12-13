@@ -17,6 +17,10 @@ ansibullbot_receiver_bin_path: "{{ ansibullbot_clone_path }}/scripts/ansibot_rec
 ansibullbot_slack_message: Updating Ansibullbot
 ansibullbot_slack_token: []
 
+# Messages posted to Slack when SystemD service starts/stops
+ansibullbot_start_message: I just started
+ansibullbot_stop_message: I just stopped
+
 # Options passed to triage_ansible.py
 ansibullbot_cache_days_to_keep: 30
 ansibullbot_daemonize_interval: 300
