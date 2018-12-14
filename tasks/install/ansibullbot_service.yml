@@ -38,7 +38,7 @@
     hour: '*/3'
     user: "{{ ansibullbot_user }}"
     name: Generate issues by file
-    job: 'cd {{ ansibullbot_clone_path }}; PYTHONPATH=. python scripts/generate_issues_by_file.py {{ caddy_root }}/html/ansibot/metadata'
+    job: 'cd {{ ansibullbot_clone_path }}; PYTHONPATH=. python scripts/generate_issues_by_file.py {{ caddy_root }}/ansibot/html/metadata'
   tags:
     - ansibullbot
     - ansibullbot_cron
