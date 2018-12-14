@@ -52,8 +52,8 @@ ansibullbot_packages:
   - python-epdb
 
 ansibullbot_recevier_pip_packages:
-  - Flask
-  - flask_pymongo
+  - Flask==0.12.2
+  - flask_pymongo==0.5.1
 
 ansibullbot_sentry_url: ~
 ansibullbot_sentry_env: prod
