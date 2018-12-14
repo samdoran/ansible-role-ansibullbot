@@ -68,7 +68,7 @@
   template:
     src: caddy_ansibullbot.conf.j2
     dest: "{{ caddy_config_path }}/conf.d/ansibullbot.conf"
-  notify: restart caddy
+  notify: reload caddy
   tags:
     - ansibullbot
     - ansibullbot_monitoring
