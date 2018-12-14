@@ -6,12 +6,8 @@ errors {{ caddy_log_path }}/ansibot_error.log {
 }
 status 404 error.html
 
-proxy /schemavalidator 172.20.0.4:5000 {
+proxy /schemavalidator/ 172.20.0.4:5000 {
     without /schemavalidator
-}
-
-proxy /schemavalidator/static 172.20.0.4:5000 {
-    without /schemavalidator/static
 }
 
 # Prevent access to dotfiles
