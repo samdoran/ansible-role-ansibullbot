@@ -55,6 +55,8 @@ ansibullbot_recevier_pip_packages:
   - Flask==0.12.2
   - flask_pymongo==0.5.1
 
+# Sentry
 ansibullbot_sentry_url: ~
 ansibullbot_sentry_env: prod
 ansibullbot_sentry_trace: true
+ansibullbot_sentry_server_name: ansibullbot

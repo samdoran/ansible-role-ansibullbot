@@ -19,5 +19,6 @@ port={{ ansibullbot_receiver_port }}
 {% if ansibullbot_sentry_url is not none %}
 dsn={{ ansibullbot_sentry_url }}
 {% endif %}
+server_name={{ ansibullbot_sentry_server_name }}
 env={{ ansibullbot_sentry_env }}
 trace={{ ansibullbot_sentry_trace | string | capitalize }}

@@ -37,7 +37,9 @@ Role Variables
  | `ansibullbot_slack_token` | `[]` | Slack API toke. This should be stored in an Ansible Vault. |
  | `ansibullbot_sentry_url` | `~` | URL of the Sentry server. |
  | `ansibullbot_sentry_env` | `prod` | Sentry environment |
- | `ansibullbot_sentry_trace` | `true` | Whether or not to collect trace information and send to Sentry. |
+ | `ansibullbot_sentry_trace` | `true` | Whether or not to collect trace information and
+ send to Sentry. |
+ | `ansibullbot_sentry_server_name` | `ansibullbot` | Unique name used to identify this server in Sentry. |
 
 Dependencies
 ------------
