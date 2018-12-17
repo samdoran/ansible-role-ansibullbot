@@ -6,9 +6,14 @@ errors {{ caddy_log_path }}/ansibot_error.log {
 }
 status 404 error.html
 
+# Proxy schemavalidator with or without trailing /
+redir /schemavalidator /schemavalidator/
 proxy /schemavalidator/ 172.20.0.4:5000 {
     without /schemavalidator
 }
+
+# Allow browsing /metadata
+browse /metadata
 
 # Prevent access to dotfiles
 rewrite {
@@ -16,8 +21,12 @@ rewrite {
     to error.html
 }
 
-rewrite /ansibot/metadata/byfile_sorted.html /metadata/byfile_sorted.html
-rewrite /byfile /metadata/byfile_sorted.html
+# Accept /byfile and /byfile/ when you want the HTML byfile page
+redir /ansibot/metadata/byfile_sorted.html /metadata/byfile_sorted.html 301
+rewrite {
+    r ^/byfile/?$
+    to /metadata/byfile_sorted.html
+}
 
 cgi {
     match /cgi-bin/ansibot_status.cgi

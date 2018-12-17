@@ -13,5 +13,6 @@
     - ansibullbot_update
     - ssh
     - user
+    - packages
 
 - import_tasks: monitoring.yml
