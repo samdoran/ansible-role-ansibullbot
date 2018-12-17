@@ -1,8 +1,7 @@
 - name: send slack message
   slack:
     msg: "{{ ansibullbot_slack_message }}"
-    token: "{{ item }}"
-  loop: "{{ ansibullbot_slack_token }}"
+    token: "{{ ansibullbot_slack_token }}"
 
 - name: restart ansibullbot
   systemd:
