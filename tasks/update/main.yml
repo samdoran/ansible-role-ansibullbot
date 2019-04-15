@@ -2,7 +2,8 @@
   git:
     repo: "{{ ansibullbot_repo_url }}"
     dest: "{{ ansibullbot_clone_path }}"
-    force: true
+    force: yes
+  become: yes
   become_user: "{{ ansibullbot_user }}"
   notify:
     - send slack message
@@ -57,7 +58,7 @@
   copy:
     src: "{{ ansibullbot_clone_path ~ '/scripts/ansibot_status.cgi' }}"
     dest: "{{ caddy_root }}/cgi-bin/ansibot_status.cgi"
-    remote_src: true
+    remote_src: yes
     owner: root
     group: root
     mode: '0755'

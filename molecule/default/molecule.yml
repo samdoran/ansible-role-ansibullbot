@@ -5,7 +5,7 @@ driver:
 lint:
   name: yamllint
   options:
-    config-file: molecule/default/yaml-lint.yml
+    config-file: molecule/default/yamllint.yml
 platforms:
   - name: ansibullbot-test
     image: "samdoran/${MOLECULE_DISTRIBUTION:-centos7}-ansible:latest"
@@ -18,6 +18,14 @@ provisioner:
   name: ansible
   lint:
     name: ansible-lint
+    options:
+      exclude:
+        - molecule/default/playbook.yml
+      x:
+        - 204  # Lines should be no longer than 160 chars
+        - 401  # Git checkouts must contain explicit version
+        - 403  # Package installs should not use latest
+        - 502  # All tasks should be named
   playbooks:
     converge: ${MOLECULE_PLAYBOOK:-playbook.yml}
   options:

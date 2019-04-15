@@ -30,7 +30,7 @@
   copy:
     src: "{{ ansibullbot_clone_path ~ '/scripts/ansibot_status.cgi' }}"
     dest: "{{ caddy_root }}/cgi-bin/ansibot_status.cgi"
-    remote_src: true
+    remote_src: yes
     owner: root
     group: root
     mode: '0755'
@@ -41,7 +41,7 @@
   user:
     name: "{{ caddy_user }}"
     groups: "{{ ansibullbot_group }}"
-    append: true
+    append: yes
   tags:
     - ansibullbot
     - ansibullbot_monitoring
@@ -61,7 +61,7 @@
     path: "{{ ansibullbot_clone_path }}"
     owner: "{{ ansibullbot_user }}"
     group: "{{ ansibullbot_group }}"
-    recurse: true
+    recurse: yes
     mode: 'g+r'
 
 - name: MONITORING | Copy Caddy config file

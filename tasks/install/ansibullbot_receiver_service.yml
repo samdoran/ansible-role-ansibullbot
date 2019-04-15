@@ -15,7 +15,7 @@
 
 - name: RECIVER | SystemD daemon reload
   systemd:
-    daemon_reload: true
+    daemon_reload: yes
   when: receiver_unit_file is changed
   tags:
     - ansibullbot
@@ -37,8 +37,8 @@
 - name: RECIVER | Start and enable ansibullbot-receiver
   systemd:
     name: ansibullbot-receiver
-    daemon_reload: true
-    enabled: true
+    daemon_reload: yes
+    enabled: yes
     state: started
   tags:
     - ansibullbot

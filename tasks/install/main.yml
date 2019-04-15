@@ -91,8 +91,9 @@
   git:
     repo: https://github.com/ansible/ansibullbot
     dest: "{{ ansibullbot_clone_path }}"
-    recursive: true
-    force: true
+    recursive: yes
+    force: yes
+  become: yes
   become_user: "{{ ansibullbot_user }}"
   tags:
     - ansibullbot
@@ -110,7 +111,7 @@
 - name: Download stopwords
   shell: python -c 'import nltk; nltk.download("punkt")'
   become_user: "{{ ansibullbot_user }}"
-  become: true
+  become: yes
   args:
     creates: ~{{ ansibullbot_user }}/nltk_data
   tags:

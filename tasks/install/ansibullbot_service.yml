@@ -59,7 +59,7 @@
 
 - name: SERVICE | SystemD daemon reload
   systemd:
-    daemon_reload: true
+    daemon_reload: yes
   when: ansibullbot_service_unit_file is changed
   tags:
     - ansibullbot
@@ -69,8 +69,8 @@
 - name: SERVICE | Start and enable ansibullbot
   systemd:
     name: ansibullbot
-    daemon_reload: true
-    enabled: true
+    daemon_reload: yes
+    enabled: yes
     state: started
   tags:
     - ansibullbot
