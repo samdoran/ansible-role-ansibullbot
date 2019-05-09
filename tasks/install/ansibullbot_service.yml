@@ -1,6 +1,6 @@
 - name: SERVICE | Create initial log file
   copy:
-    force: false
+    force: no
     dest: "{{ ansibullbot_log_path }}"
     content: ''
     owner: "{{ ansibullbot_user }}"
@@ -49,7 +49,7 @@
     dest: /etc/systemd/system/ansibullbot.service
     owner: root
     group: root
-    mode: 0644
+    mode: '0644'
   notify: restart ansibullbot
   register: ansibullbot_service_unit_file
   tags:

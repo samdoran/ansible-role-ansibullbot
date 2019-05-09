@@ -25,7 +25,7 @@
     dest: ~{{ ansibullbot_user }}/.ansibullbot.cfg
     owner: "{{ ansibullbot_user }}"
     group: "{{ ansibullbot_group }}"
-    mode: 0600
+    mode: '0600'
   tags:
     - ansibullbot_dotfiles
     - ansibullbot_update
@@ -36,7 +36,7 @@
     dest: /etc/systemd/system/ansibullbot.service
     owner: root
     group: root
-    mode: 0644
+    mode: '0644'
   notify: restart ansibullbot
   tags:
     - ansibullbot_service
@@ -48,7 +48,7 @@
     dest: /etc/systemd/system/ansibullbot-receiver.service
     owner: root
     group: root
-    mode: 0644
+    mode: '0644'
   notify: restart ansibullbot-receiver
   tags:
     - ansibullbot_service

@@ -23,7 +23,7 @@ Role Variables
 | `ansibullbot_clone_path` | `{{ ansibullbot_home_dir }}/ansibullbot` | Where to clone the `ansibullbot` git repository. |
 | `ansibullbot_log_path` | `/var/log/ansibullbot.log` | Path to log file. |
 | `ansibullbot_cache_dir` | `{{ ansibullbot_home_dir }}/.ansibullbot/cache/shippable.runs/.raw` | Where cache files are stored. Used for cleaning up old cache files. |
-| `ansibullbot_enable_receiver` | `false` | Whether or not to enaable the `ansibullbot_receiver` service. Requires  |
+| `ansibullbot_enable_receiver` | `no` | Whether or not to enaable the `ansibullbot_receiver` service. Requires  |
 | `ansibullbot_cache_days_to_keep` | `30` | How many days wort of cache files to keep. |
 | `ansibullbot_debug` | `True` | Whether or not to enable debugging. |
 | `ansibullbot_github_username` | `ansibot` | GitHub account used for authenticating to the GitHub API. |

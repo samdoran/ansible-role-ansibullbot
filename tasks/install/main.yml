@@ -81,7 +81,7 @@
     dest: ~{{ ansibullbot_user }}/.ansibullbot.cfg
     owner: "{{ ansibullbot_user }}"
     group: "{{ ansibullbot_group }}"
-    mode: 0600
+    mode: '0600'
   notify: restart ansibullbot
   tags:
     - ansibullbot
