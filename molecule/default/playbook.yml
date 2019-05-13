@@ -18,6 +18,8 @@
 
     - import_role:
         name: caddy
+      vars:
+        caddy_download_custom_build: yes
 
     - import_role:
         name: ansibullbot
