@@ -42,14 +42,16 @@ ansibullbot_receiver_host: 127.0.0.1
 ansibullbot_receiver_port: 5001
 
 ansibullbot_packages:
-  - tmux
-  - vim
-  - git
-  - unzip
-  - python2-pip
+  - bash-completion
+  - bash-completion-extras
   - gcc
+  - git
   - python-devel
   - python-epdb
+  - python2-pip
+  - tmux
+  - unzip
+  - vim
 
 ansibullbot_recevier_pip_packages:
   - Flask==0.12.2
