@@ -34,7 +34,7 @@
 - name: SERVICE | Create cron job to generate issues by file
   cron:
     cron_file: ansibullbot
-    minute: 0
+    minute: '0'
     hour: '*/3'
     user: "{{ ansibullbot_user }}"
     name: Generate issues by file

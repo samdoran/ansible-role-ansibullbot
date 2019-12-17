@@ -28,7 +28,7 @@
 - name: Create {{ ansibullbot_group }} group
   group:
     name: "{{ ansibullbot_group }}"
-    gid: 1099
+    gid: '1099'
   tags:
     - ansibullbot
     - user
@@ -37,7 +37,7 @@
   user:
     name: "{{ ansibullbot_user }}"
     home: "{{ ansibullbot_home_dir }}"
-    uid: 1099
+    uid: '1099'
   tags:
     - ansibullbot
     - user
