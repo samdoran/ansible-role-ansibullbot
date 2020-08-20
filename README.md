@@ -29,17 +29,18 @@ Role Variables
 | `ansibullbot_github_username` | `ansibot` | GitHub account used for authenticating to the GitHub API. |
 | `ansibullbot_github_password` | `''` | Password for authenticating to the GitHub. This should be stored in an Ansible Vault. |
 | `ansibullbot_github_token` | `''` | GitHub API token used to talk to GitHub. This should be stored in an Ansible Vault. |
- | `ansibullbot_shippable_token` | `''` | Taken for talking to the Shippable API. This should be stored in an Ansible Vault. |
- | `ansibullbot_receiver_host` | `''` | Database where data is sent. |
- | `ansibullbot_receiver_port` | `''` | Database port. |
- | `ansibullbot_packages` | [see `defaults/main.yml`] | List of packages to install. |
- | `ansibullbot_slack_message` | `Updating Ansibullbot` | Message posted to Slack when updating Anisbullbot. |
- | `ansibullbot_slack_token` | `[]` | Slack API toke. This should be stored in an Ansible Vault. |
- | `ansibullbot_sentry_url` | `~` | URL of the Sentry server. |
- | `ansibullbot_sentry_env` | `prod` | Sentry environment |
- | `ansibullbot_sentry_trace` | `true` | Whether or not to collect trace information and
- send to Sentry. |
- | `ansibullbot_sentry_server_name` | `ansibullbot` | Unique name used to identify this server in Sentry. |
+| `ansibullbot_shippable_token` | `''` | Taken for talking to the Shippable API. This should be stored in an Ansible Vault. |
+| `ansibullbot_receiver_host` | `` | Database where data is sent. |
+| `ansibullbot_receiver_port` | `''` | Database port. |
+| `ansibullbot_repos` | `[undefined]` | List of repositories the bot will interact with. |
+| `ansibullbot_collection_repos` | `[undefined]` | List of collection repositories the bot will interact with. |
+| `ansibullbot_packages` | [see `defaults/main.yml`] | List of packages to install. |
+| `ansibullbot_slack_message` | `Updating Ansibullbot` | Message posted to Slack when updating Anisbullbot. |
+| `ansibullbot_slack_token` | `[]` | Slack API toke. This should be stored in an Ansible Vault. |
+| `ansibullbot_sentry_url` | `~` | URL of the Sentry server. |
+| `ansibullbot_sentry_env` | `prod` | Sentry environment |
+| `ansibullbot_sentry_trace` | `true` | Whether or not to collect trace information and send to Sentry. |
+| `ansibullbot_sentry_server_name` | `ansibullbot` | Unique name used to identify this server in Sentry. |
 
 Dependencies
 ------------
@@ -59,4 +60,4 @@ Example Playbook
 License
 -------
 
-MIT
+Apache 2.0

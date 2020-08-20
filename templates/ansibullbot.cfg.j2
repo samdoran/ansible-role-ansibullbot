@@ -1,3 +1,4 @@
+#jinja2:lstrip_blocks: True
 [defaults]
 debug={{ ansibullbot_debug }}
 github_username={{ ansibullbot_github_username }}
@@ -9,6 +10,22 @@ slack_url={{ ansibullbot_slack_url }}
 {% endif %}
 {% if ansibullbot_notify_email is defined %}
 email={{ ansibullbot_notify_email }}
+{% endif %}
+{% if ansibullbot_repos is defined %}
+repos=
+{% for repo in ansibullbot_repos %}
+    {{ repo }}{% if not loop.last %},
+    {% endif %}
+{% endfor %}
+
+{% endif %}
+{% if ansibullbot_collection_repos is defined %}
+collection_repos=
+{% for repo in ansibullbot_collection_repos %}
+    {{ repo }}{% if not loop.last %},
+    {% endif %}
+{% endfor %}
+
 {% endif %}
 
 [receiver]
