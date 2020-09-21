@@ -89,8 +89,9 @@
 
 - name: Checkout git repo
   git:
-    repo: https://github.com/ansible/ansibullbot
+    repo: "{{ ansibullbot_repo_url }}"
     dest: "{{ ansibullbot_clone_path }}"
+    refspec: "{{ ansibullbot_branch }}"
     recursive: yes
     force: yes
   become: yes

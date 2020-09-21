@@ -2,6 +2,7 @@ ansibullbot_action: install
 ansibullbot_user: ansibot
 ansibullbot_group: "{{ ansibullbot_user }}"
 ansibullbot_repo_url: https://github.com/ansible/ansibullbot
+ansibullbot_branch: master
 ansibullbot_home_dir: /home/{{ ansibullbot_user }}
 ansibullbot_clone_path: "{{ ansibullbot_home_dir }}/ansibullbot"
 ansibullbot_log_path: /var/log/ansibullbot.log

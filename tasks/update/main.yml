@@ -2,6 +2,7 @@
   git:
     repo: "{{ ansibullbot_repo_url }}"
     dest: "{{ ansibullbot_clone_path }}"
+    refspec: "{{ ansibullbot_branch }}"
     force: yes
   become: yes
   become_user: "{{ ansibullbot_user }}"
