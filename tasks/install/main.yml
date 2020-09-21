@@ -91,6 +91,7 @@
   git:
     repo: https://github.com/ansible/ansibullbot
     dest: "{{ ansibullbot_clone_path }}"
+    refspec: "{{ ansibullbot_branch }}"
     recursive: yes
     force: yes
   become: yes
