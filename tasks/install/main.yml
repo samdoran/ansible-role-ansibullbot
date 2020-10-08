@@ -42,28 +42,6 @@
     - ansibullbot
     - user
 
-- name: Set ssh authorized_keys for centos
-  authorized_key:
-    key: "{{ item.key_material }}"
-    user: centos
-    comment: "{{ item.commend | default(item.name) }}"
-    state: "{{ item.state | default(omit) }}"
-  loop: "{{ botinstance_ssh_keys }}"
-  tags:
-    - ansibullbot
-    - ssh
-
-- name: Set ssh authorized_keys for {{ ansibullbot_user }}
-  authorized_key:
-    key: "{{ item.key_material }}"
-    user: "{{ ansibullbot_user }}"
-    comment: "{{ item.commend | default(item.name) }}"
-    state: "{{ item.state | default(omit) }}"
-  loop: "{{ botinstance_ssh_keys }}"
-  tags:
-    - ansibullbot
-    - ssh
-
 - name: Copy dotfiles for root
   copy:
     src: "{{ item }}"
