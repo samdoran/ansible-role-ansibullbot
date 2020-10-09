@@ -11,7 +11,7 @@
 
 - name: Set hostname
   hostname:
-    name: "{{ ansibullbot_fqdn }}"
+    name: "{{ inventory_hostname }}"
   tags:
     - ansibullbot
     - ansibullbot_hostname
