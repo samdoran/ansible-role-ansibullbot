@@ -3,12 +3,13 @@ ansibullbot_user: ansibot
 ansibullbot_group: "{{ ansibullbot_user }}"
 ansibullbot_repo_url: https://github.com/ansible/ansibullbot
 ansibullbot_branch: master
-ansibullbot_home_dir: /home/{{ ansibullbot_user }}
+ansibullbot_home_dir: /var/lib/{{ ansibullbot_user }}
 ansibullbot_clone_path: "{{ ansibullbot_home_dir }}/ansibullbot"
 ansibullbot_log_path: /var/log/ansibullbot.log
 ansibullbot_cache_dir: "{{ ansibullbot_home_dir }}/.ansibullbot/cache/shippable.runs/.raw"
 ansibullbot_fqdn: ansibullbot.eng.ansible.com
 ansibullbot_url: https://{{ ansibullbot_fqdn }}
+ansibullbot_venv_dir: "{{ ansibullbot_home_dir }}/venv"
 
 # Ansibullbot receiver
 ansibullbot_receiver_enabled: false
@@ -46,12 +47,8 @@ ansibullbot_receiver_port: 5001
 
 ansibullbot_packages:
   - bash-completion
-  - bash-completion-extras
   - gcc
   - git
-  - python-devel
-  - python-epdb
-  - python2-pip
   - tmux
   - unzip
   - vim

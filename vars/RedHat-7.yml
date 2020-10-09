@@ -1,0 +1,4 @@
+_ansibullbot_extra_packages:
+  - python-devel
+  - python-epdb
+  - python2-pip

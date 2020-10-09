@@ -19,7 +19,7 @@
 
 - name: Install packages
   yum:
-    name: "{{ ansibullbot_packages }}"
+    name: "{{ ansibullbot_packages | union(_ansibullbot_extra_packages) | default([]) }}"
     state: latest
   tags:
     - ansibullbot
@@ -56,7 +56,7 @@
 - name: Copy ansibullbot.cfg
   template:
     src: ansibullbot.cfg.j2
-    dest: ~{{ ansibullbot_user }}/.ansibullbot.cfg
+    dest: "{{ ansibullbot_home_dir }}/.ansibullbot.cfg"
     owner: "{{ ansibullbot_user }}"
     group: "{{ ansibullbot_group }}"
     mode: '0600'
@@ -79,25 +79,32 @@
     - ansibullbot_git
     - ansibullbot_update
 
-- name: Install Python requirements
+- name: Create virtualenv and install Python requirements
   pip:
     requirements: "{{ ansibullbot_clone_path }}/requirements.txt"
+    virtualenv_command: "{{ _ansibullbot_python_executable | default(ansible_playbook_python) }} -m venv"
+    virtualenv: "{{ ansibullbot_venv_dir }}"
+  become_user: "{{ ansibullbot_user }}"
   tags:
     - ansibullbot
     - ansibullbot_pip
     - ansibullbot_update
 
 - name: Download stopwords
-  shell: python -c 'import nltk; nltk.download("punkt")'
+  shell: "{{ ansibullbot_home_dir }}/bin/python3.8 -c 'import nltk; nltk.download(\"punkt\")'"
   become_user: "{{ ansibullbot_user }}"
-  become: yes
   args:
-    creates: ~{{ ansibullbot_user }}/nltk_data
+    creates: "{{ ansibullbot_home_dir }}/nltk_data"
   tags:
     - ansibullbot
     - ansibullbot_nltk_data
 
 - import_tasks: ansibullbot_service.yml
 
-- import_tasks: ansibullbot_receiver_service.yml
+- include_tasks: ansibullbot_receiver_service.yml
   when: ansibullbot_receiver_enabled
+  tags:
+    - ansibullbot
+    - ansibullbot_receiver
+    - ansibullbot_service
+    - ansibullbot_update
