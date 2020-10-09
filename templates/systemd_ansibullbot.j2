@@ -14,9 +14,10 @@ Restart=on-failure
 StandardOutput=null
 StandardError=null
 
-ExecStartPost=-/bin/sh -c "{{ ansibullbot_clone_path }}/scripts/slack-notice.py -m '{{ ansibullbot_start_message }}'"
-ExecStart={{ ansibullbot_clone_path }}/triage_ansible.py {% for option in ansibullbot_options %}--{{ option }}{% if not loop.last %} {% endif %}{% endfor %}
-ExecStopPost=-/bin/sh -c "{{ ansibullbot_clone_path }}/scripts/slack-notice.py -m '{{ ansibullbot_stop_message }}' -e"
+ExecStartPre=-{{ ansibullbot_venv_dir }}/bin/python {{ ansibullbot_clone_path }}/scripts/slack-notice.py -m 'DEVBOT_ExecPre_command'
+ExecStart={{ ansibullbot_venv_dir }}/bin/python {{ ansibullbot_clone_path }}/triage_ansible.py {% for option in ansibullbot_options %}--{{ option }}{% if not loop.last %} {% endif %}{% endfor %}
+ExecStartPost=-{{ ansibullbot_venv_dir }}/bin/python {{ ansibullbot_clone_path }}/scripts/slack-notice.py -m '{{ ansibullbot_start_message }}'
+ExecStopPost=-{{ ansibullbot_venv_dir }}/bin/python {{ ansibullbot_clone_path }}/scripts/slack-notice.py -m '{{ ansibullbot_stop_message }}'
 WorkingDirectory={{ ansibullbot_clone_path }}
 
 [Install]
