@@ -19,3 +19,6 @@
   service:
     name: caddy
     state: reloaded
+
+- name: restorecon
+  command: restorecon -ir {{ ansibullbot_home_dir }}

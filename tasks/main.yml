@@ -25,6 +25,7 @@
     - ansibullbot_pip
     - ansibullbot_receiver
     - ansibullbot_service
+    - ansibullbot_selinux
     - ansibullbot_update
     - ssh
     - user

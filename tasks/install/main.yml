@@ -1,9 +1,23 @@
-# Only needed due monitoring via CGI script. Once that is changed, SELinux
-# can be set to Enforcing again.
 - name: Enable SELinux
   ansible.posix.selinux:
     state: enforcing
     policy: targeted
+  tags:
+    - ansibullbot
+    - ansibullbot_selinux
+    - notest
+
+- name: Set fcontext
+  community.general.sefcontext:
+    setype: initrc_var_run_t
+    target: "{{ ansibullbot_home_dir }}(/.*)?"
+  notify: restorecon
+  tags:
+    - ansibullbot
+    - ansibullbot_selinux
+    - notest
+
+- meta: flush_handlers
   tags:
     - ansibullbot
     - ansibullbot_selinux
