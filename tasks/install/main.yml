@@ -1,7 +1,7 @@
 # Only needed due monitoring via CGI script. Once that is changed, SELinux
 # can be set to Enforcing again.
 - name: Enable SELinux
-  selinux:
+  ansible.posix.selinux:
     state: enforcing
     policy: targeted
   tags:
