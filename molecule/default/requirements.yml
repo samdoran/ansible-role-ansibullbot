@@ -1,5 +1,9 @@
-- src: samdoran.repo_epel
-  name: repo_epel
+collections:
+  - name: community.general
 
-- src: samdoran.caddy
-  name: caddy
+roles:
+  - src: samdoran.repo_epel
+    name: repo_epel
+
+  - src: samdoran.caddy
+    name: caddy
