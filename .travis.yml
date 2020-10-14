@@ -18,6 +18,7 @@ before_script:
   - cd $ROLE_NAME
 
 script:
+  - ansible-galaxy install -n -r molecule/default/requirements.yml
   # Run tests
   - molecule test --all
 

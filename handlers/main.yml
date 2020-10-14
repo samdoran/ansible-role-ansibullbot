@@ -1,5 +1,5 @@
 - name: send slack message
-  slack:
+  community.general.slack:
     msg: "{{ ansibullbot_slack_message }}"
     token: "{{ ansibullbot_slack_token }}"
 
@@ -19,3 +19,6 @@
   service:
     name: caddy
     state: reloaded
+
+- name: restorecon
+  command: restorecon -ir {{ ansibullbot_home_dir }}

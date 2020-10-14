@@ -1,4 +1,4 @@
-- name: RECIVER | Copy ansibullbot-receiver unit file
+- name: RECEIVER | Copy ansibullbot-receiver unit file
   template:
     src: systemd_ansibullbot_receiver.j2
     dest: /etc/systemd/system/ansibullbot-receiver.service
@@ -9,32 +9,27 @@
   register: receiver_unit_file
   tags:
     - ansibullbot
-    - ansibullbot_receiver
-    - ansibullbot_service
-    - ansibullbot_update
+    - ansibullbot_receiever
 
-- name: RECIVER | SystemD daemon reload
+- name: RECEIVER | SystemD daemon reload
   systemd:
     daemon_reload: yes
   when: receiver_unit_file is changed
   tags:
     - ansibullbot
-    - ansibullbot_receiver
-    - ansibullbot_service
-    - ansibullbot_update
+    - ansibullbot_receiever
 
-
-- name: RECIVER | Install ansibullbot_receievr pip packages
+- name: RECEIVER | Install ansibullbot_receiever pip packages
   pip:
     name: "{{ ansibullbot_recevier_pip_packages }}"
     state: present
+    virtualenv_command: "{{ _ansibullbot_python_executable | default(ansible_playbook_python) }} -m venv"
+    virtualenv: "{{ ansibullbot_venv_dir }}"
   tags:
     - ansibullbot
-    - ansibullbot_receiver
-    - ansibullbot_service
-    - ansibullbot_update
+    - ansibullbot_receiever
 
-- name: RECIVER | Start and enable ansibullbot-receiver
+- name: RECEIVER | Start and enable ansibullbot-receiver
   systemd:
     name: ansibullbot-receiver
     daemon_reload: yes

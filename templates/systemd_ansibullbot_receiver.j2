@@ -11,7 +11,7 @@ Group={{ ansibullbot_group }}
 
 Restart=on-failure
 
-ExecStart={{ ansible_python.executable }} {{ ansibullbot_receiver_bin_path }}
+ExecStart={{ ansibullbot_venv_dir }}/bin/python {{ ansibullbot_receiver_bin_path }}
 WorkingDirectory={{ ansibullbot_clone_path }}
 
 [Install]
