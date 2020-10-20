@@ -66,8 +66,8 @@
 
 - name: MONITORING | Copy Caddy config file
   template:
-    src: caddy_ansibullbot.conf.j2
-    dest: "{{ caddy_config_path }}/conf.d/ansibullbot.conf"
+    src: Caddyfile_ansibullbot.j2
+    dest: "{{ caddy_config_path }}/conf.d/ansibullbot"
   notify: reload caddy
   tags:
     - ansibullbot

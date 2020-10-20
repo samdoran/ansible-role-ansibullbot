@@ -1,0 +1,53 @@
+{{ ansibullbot_url }} {
+    root * {{ caddy_root }}/ansibot/html
+    file_server
+    log {
+        output file {{ caddy_log_path }}/ansibot.log {
+            roll_size 500MiB
+            roll_keep 10
+            roll_keep_for 720h
+        }
+    }
+
+    handle_errors {
+        rewrite * /error.html
+        file_server
+    }
+
+    # Proxy schemavalidator with or without trailing /
+    redir /schemavalidator /schemavalidator/
+    reverse_proxy /schemavalidator/ 172.20.0.4:5000
+
+    # Allow browsing /metadata
+    file_server /metadata/* browse
+{% if 'dev' in inventory_hostname %}
+    tls {
+        ca https://acme-staging-v02.api.letsencrypt.org/directory
+    }
+{% endif %}
+
+    # Prevent access to dotfiles
+    @dotfiles {
+        expression {path}.startsWith(".")
+    }
+    rewrite @dotfiles /error.html
+{#
+    # Accept /byfile and /byfile/ when you want the HTML byfile page
+    redir /ansibot/metadata/byfile_sorted.html /metadata/byfile_sorted.html 301
+    rewrite {
+        path_regexp ^/byfile/?$
+        to /metadata/byfile_sorted.html
+    }
+
+    cgi {
+        match /cgi-bin/ansibot_status.cgi
+        exec {{ caddy_root }}/cgi-bin/ansibot_status.cgi
+    }
+
+    cgi {
+        match /status
+        exec {{ caddy_root }}/cgi-bin/ansibot_status.cgi
+    }
+
+#}
+}
