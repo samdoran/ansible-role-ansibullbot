@@ -3,16 +3,24 @@ ansibullbot_url: http://localhost
 
 botinstance_ssh_keys:
   - name: testkey
-    key_material: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDBGOiRLbe2bYk6dO1b7q6xi7xw+95SAA4wwr2vqPUYYEpqzR26iotTpylFp8ZcsUV0uP0six+PII1vpERQJ0otO/lCETRNzRnlDRpHx2GOTBAtyZGXooPX6TWsGW2yly0/2Y6WV14daWijCArRsXzA4ygkNxnYihIDXFCvsizzeu+OKs35wWhuhK9ZhKBTl5gH1PnfdxvbahY2qsLN06DOhscr1iAtlUO60ro4Gtt/iUPUm8ZKvReWJ5aIn4jCL5VgSeK0gmIJyD1h6LC80JV/s+f6qd2RpVUr6esz830D7K0kuTOnzAQdtojjxgXamgGULlccs7EITqDHuyTvatid
+    key_material:
+      "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDBGOiRLbe2bYk6dO1b7q6xi7xw+95SAA4w\
+      wr2vqPUYYEpqzR26iotTpylFp8ZcsUV0uP0six+PII1vpERQJ0otO/lCETRNzRnlDRpHx2GO\
+      TBAtyZGXooPX6TWsGW2yly0/2Y6WV14daWijCArRsXzA4ygkNxnYihIDXFCvsizzeu+OKs35\
+      wWhuhK9ZhKBTl5gH1PnfdxvbahY2qsLN06DOhscr1iAtlUO60ro4Gtt/iUPUm8ZKvReWJ5aI\
+      n4jCL5VgSeK0gmIJyD1h6LC80JV/s+f6qd2RpVUr6esz830D7K0kuTOnzAQdtojjxgXamgGU\
+      Llccs7EITqDHuyTvatid"
 
 firewall_allowed_tcp_ports:
   - 22
   - 80
   - 443
 
-caddy_root: /usr/share/caddy
-caddy_config_path: /etc/caddy
-caddy_user: caddy
-caddy_group: caddy
-caddy_download_custom_build: true
-caddy_systemd_protect_home: 'false'
+firewall_firewalld_rules:
+  - zone: public
+    masquerade: yes
+
+caddy_global_config_options:
+  - order cgi last
+caddy_plugins:
+  - github.com/aksdb/caddy-cgi/v2
