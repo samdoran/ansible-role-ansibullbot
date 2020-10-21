@@ -105,7 +105,7 @@
     - ansibullbot_update
 
 - name: Download stopwords
-  shell: "{{ ansibullbot_home_dir }}/bin/python3.8 -c 'import nltk; nltk.download(\"punkt\")'"
+  shell: "{{ ansibullbot_venv_dir }}/bin/python3.8 -c 'import nltk; nltk.download(\"punkt\")'"
   become_user: "{{ ansibullbot_user }}"
   args:
     creates: "{{ ansibullbot_home_dir }}/nltk_data"
