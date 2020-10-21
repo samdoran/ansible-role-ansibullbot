@@ -1,3 +1,5 @@
+_ansibullbot_pip_executable: /usr/bin/pip
+_ansibullbot_python_executable: /usr/bin/python
 _ansibullbot_extra_packages:
   - python-devel
   - python-epdb
