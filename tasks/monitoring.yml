@@ -68,6 +68,7 @@
   template:
     src: Caddyfile_ansibullbot.j2
     dest: "{{ caddy_config_path }}/conf.d/ansibullbot"
+    lstrip_blocks: yes
   notify: reload caddy
   tags:
     - ansibullbot
