@@ -6,7 +6,7 @@ env:
   global:
     - ROLE_NAME: ansibullbot
   matrix:
-    - MOLECULE_DISTRIBUTION: centos7
+    - MOLECULE_DISTRIBUTION: centos8
 
 install:
   - pip install molecule==3.0.8 docker yamllint ansible ansible-lint
