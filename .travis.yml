@@ -9,7 +9,7 @@ env:
     - MOLECULE_DISTRIBUTION: centos7
 
 install:
-  - pip install molecule[lint]==3.0.6 docker==4.2.2
+  - pip install molecule==3.0.8 docker yamllint ansible ansible-lint
 
 before_script:
   # Remove "ansible-role-" prefix from role name

@@ -5,6 +5,7 @@
     content: ''
     owner: "{{ ansibullbot_user }}"
     group: "{{ ansibullbot_group }}"
+    mode: '0644'
   tags:
     - ansibullbot
     - ansibullbot_logs
@@ -14,6 +15,9 @@
   template:
     src: logrotate_ansibullbot.j2
     dest: /etc/logrotate.d/ansibullbot
+    owner: root
+    group: root
+    mode: '0644'
   tags:
     - ansibullbot
     - ansibullbot_logs
@@ -38,7 +42,7 @@
     hour: '*/3'
     user: "{{ ansibullbot_user }}"
     name: Generate issues by file
-    job: 'cd {{ ansibullbot_clone_path }}; PYTHONPATH=. python scripts/generate_issues_by_file.py {{ caddy_root }}/ansibot/html/metadata'
+    job: 'cd {{ ansibullbot_clone_path }}; PYTHONPATH=. {{ ansibullbot_venv_dir }}/bin/python scripts/generate_issues_by_file.py {{ caddy_root }}/ansibot/html/metadata'
   tags:
     - ansibullbot
     - ansibullbot_cron

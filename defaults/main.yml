@@ -6,9 +6,10 @@ ansibullbot_branch: master
 ansibullbot_home_dir: /var/lib/{{ ansibullbot_user }}
 ansibullbot_clone_path: "{{ ansibullbot_home_dir }}/ansibullbot"
 ansibullbot_log_path: /var/log/ansibullbot.log
+ansibullbot_caddy_log_path: /var/log/caddy/ansibot.log
 ansibullbot_cache_dir: "{{ ansibullbot_home_dir }}/.ansibullbot/cache/shippable.runs/.raw"
 ansibullbot_fqdn: ansibullbot.eng.ansible.com
-ansibullbot_url: https://{{ ansibullbot_fqdn }}
+ansibullbot_url: "{{ ansibullbot_fqdn }}"
 ansibullbot_venv_dir: "{{ ansibullbot_home_dir }}/venv"
 
 # Ansibullbot receiver

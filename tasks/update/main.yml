@@ -68,8 +68,12 @@
 
 - name: Copy Caddy config file
   template:
-    src: caddy_ansibullbot.conf.j2
-    dest: "{{ caddy_config_path }}/conf.d/ansibullbot.conf"
+    src: Caddyfile_ansibullbot.j2
+    dest: "{{ caddy_config_path }}/conf.d/ansibullbot"
+    lstrip_blocks: yes
+    owner: root
+    group: root
+    mode: '0644'
   notify: reload caddy
   tags:
     - ansibullbot
