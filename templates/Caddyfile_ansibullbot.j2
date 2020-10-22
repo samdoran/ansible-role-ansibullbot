@@ -25,10 +25,6 @@
     # Prevent access to dotfiles
     rewrite /.* /error.html
 
-    # Proxy schemavalidator with or without trailing /
-    redir /schemavalidator /schemavalidator/
-    reverse_proxy /schemavalidator/ 172.20.0.4:5000
-
     # Allow browsing /metadata
     file_server /metadata/* browse {
         hide .*
