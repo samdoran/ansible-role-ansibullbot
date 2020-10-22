@@ -46,7 +46,8 @@ Role Variables
 Dependencies
 ------------
 
-- samdoran.repo_epel
+- `samdoran.repo_epel`
+- `community.general` collection
 
 Example Playbook
 ----------------
