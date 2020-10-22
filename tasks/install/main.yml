@@ -62,6 +62,7 @@
     dest: ~root/.{{ item | basename }}
     owner: root
     group: root
+    mode: preserve
   with_fileglob: dotfiles/*
   tags:
     - ansibullbot

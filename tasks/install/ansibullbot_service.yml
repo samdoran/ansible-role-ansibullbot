@@ -5,6 +5,7 @@
     content: ''
     owner: "{{ ansibullbot_user }}"
     group: "{{ ansibullbot_group }}"
+    mode: '0644'
   tags:
     - ansibullbot
     - ansibullbot_logs
@@ -14,6 +15,9 @@
   template:
     src: logrotate_ansibullbot.j2
     dest: /etc/logrotate.d/ansibullbot
+    owner: root
+    group: root
+    mode: '0644'
   tags:
     - ansibullbot
     - ansibullbot_logs
