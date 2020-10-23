@@ -11,6 +11,9 @@
     - path: "{{ caddy_root }}/ansibot/html/metadata"
       owner: "{{ ansibullbot_user }}"
       group: "{{ ansibullbot_group }}"
+    - path: "{{ ansibullbot_caddy_log_path }}"
+      owner: "{{ caddy_user }}"
+      group: "{{ caddy_group }}"
   tags:
     - ansibullbot_monitoring
 
