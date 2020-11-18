@@ -36,6 +36,7 @@ ansibullbot_options:
 
 
 # Settings for ansibullbot.cfg
+ansibullbot_ci_provider: shippable
 ansibullbot_debug: true
 ansibullbot_github_username: ansibot
 ansibullbot_github_password: ''
@@ -45,6 +46,9 @@ ansibullbot_receiver_host: 127.0.0.1
 ansibullbot_receiver_port: 5001
 # ansibullbot_repos: []
 # ansibullbot_collection_repos: []
+# ansibullbot_azp:
+#   org:
+#   project:
 
 ansibullbot_packages:
   - bash-completion
