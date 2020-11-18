@@ -27,6 +27,7 @@ Role Variables
 | `ansibullbot_enable_receiver` | `no` | Whether or not to enaable the `ansibullbot_receiver` service. Requires  |
 | `ansibullbot_cache_days_to_keep` | `30` | How many days wort of cache files to keep. |
 | `ansibullbot_debug` | `True` | Whether or not to enable debugging. |
+| `ansibullbot_ci_provider` | `shippable` | CI platform the bot will interact with. Valid values are `shippable` and `azp`. |
 | `ansibullbot_github_username` | `ansibot` | GitHub account used for authenticating to the GitHub API. |
 | `ansibullbot_github_password` | `''` | Password for authenticating to the GitHub. This should be stored in an Ansible Vault. |
 | `ansibullbot_github_token` | `''` | GitHub API token used to talk to GitHub. This should be stored in an Ansible Vault. |
@@ -42,6 +43,7 @@ Role Variables
 | `ansibullbot_sentry_env` | `prod` | Sentry environment |
 | `ansibullbot_sentry_trace` | `true` | Whether or not to collect trace information and send to Sentry. |
 | `ansibullbot_sentry_server_name` | `ansibullbot` | Unique name used to identify this server in Sentry. |
+| `ansibullbot_azp` | `[undefined]` | Dictionary of config options put in the `azp` section of `ansibullbot.cfg`. |
 
 Dependencies
 ------------
