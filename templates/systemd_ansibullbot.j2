@@ -14,6 +14,7 @@ Restart=on-failure
 StandardOutput=null
 StandardError=null
 
+Environment="PATH={{ ansibullbot_venv_dir }}/bin:{{ ansible_facts.env.PATH }}"
 ExecStart={{ ansibullbot_venv_dir }}/bin/python {{ ansibullbot_clone_path }}/triage_ansible.py {% for option in ansibullbot_options %}--{{ option }}{% if not loop.last %} {% endif %}{% endfor %}
 ExecStartPost=-{{ ansibullbot_venv_dir }}/bin/python {{ ansibullbot_clone_path }}/scripts/slack-notice.py -m '{{ ansibullbot_start_message }}'
 ExecStopPost=-{{ ansibullbot_venv_dir }}/bin/python {{ ansibullbot_clone_path }}/scripts/slack-notice.py -m '{{ ansibullbot_stop_message }}'
