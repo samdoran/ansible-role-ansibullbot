@@ -15,6 +15,7 @@
       owner: "{{ caddy_user }}"
       group: "{{ caddy_group }}"
   tags:
+    - ansibullbot
     - ansibullbot_monitoring
 
 - name: MONITORING | Copy HTML files
@@ -28,6 +29,7 @@
     - index.html
     - error.html
   tags:
+    - ansibullbot
     - ansibullbot_monitoring
 
 - name: MONITORING | Copy monitoring script
@@ -39,6 +41,7 @@
     group: root
     mode: '0755'
   tags:
+    - ansibullbot
     - ansibullbot_monitoring
 
 - name: MONITORING | Add caddy user account to {{ ansibullbot_group }} group
@@ -67,6 +70,9 @@
     group: "{{ ansibullbot_group }}"
     recurse: yes
     mode: 'g+r'
+  tags:
+    - ansibullbot
+    - ansibullbot_monitoring
 
 - name: MONITORING | Copy Caddy config file
   template:
