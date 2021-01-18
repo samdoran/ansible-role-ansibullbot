@@ -16,7 +16,11 @@
 - name: Install Python requirements
   pip:
     requirements: "{{ ansibullbot_clone_path }}/requirements.txt"
+    virtualenv_command: "{{ _ansibullbot_python_executable | default(ansible_playbook_python) }} -m venv"
+    virtualenv: "{{ ansibullbot_venv_dir }}"
+  become_user: "{{ ansibullbot_user }}"
   tags:
+    - ansibullbot
     - ansibullbot_pip
     - ansibullbot_update
 
