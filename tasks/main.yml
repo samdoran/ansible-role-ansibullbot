@@ -21,7 +21,6 @@
     - ansibullbot_dotfiles
     - ansibullbot_git
     - ansibullbot_logs
-    - ansibullbot_nltk_data
     - ansibullbot_pip
     - ansibullbot_receiver
     - ansibullbot_service
