@@ -35,6 +35,5 @@
     rewrite /byfile  /metadata/byfile_sorted.html
     rewrite /byfile/ /metadata/byfile_sorted.html
 
-    cgi /cgi-bin/ansibot_status.cgi {{ caddy_root }}/cgi-bin/ansibot_status.cgi
-    cgi /status {{ caddy_root }}/cgi-bin/ansibot_status.cgi
+    cgi /status {{ ansibullbot_clone_path }}/scripts/ansibot_status.cgi
 }
