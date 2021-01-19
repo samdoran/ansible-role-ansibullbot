@@ -1,5 +1,11 @@
 {{ ansibullbot_url }} {
     root * {{ caddy_root }}/ansibot/html
+
+    @notstatus {
+        not path /status
+    }
+    file_server @notstatus
+
     log {
         output file {{ ansibullbot_caddy_log_path }}/ansibot.log {
             roll_size 500MiB
