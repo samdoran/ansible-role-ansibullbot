@@ -1,8 +1,5 @@
 {{ ansibullbot_url }} {
     root * {{ caddy_root }}/ansibot/html
-    file_server {
-        hide .*
-    }
     log {
         output file {{ ansibullbot_caddy_log_path }}/ansibot.log {
             roll_size 500MiB
