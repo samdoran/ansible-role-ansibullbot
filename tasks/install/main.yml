@@ -7,6 +7,16 @@
     - ansibullbot_selinux
     - notest
 
+- name: Enable domain_can_mmap_files
+  ansible.posix.seboolean:
+    name: domain_can_mmap_files
+    state: on
+    persistent: yes
+  tags:
+    - ansibullbot
+    - ansibullbot_selinux
+    - notest
+
 - name: Set fcontext
   community.general.sefcontext:
     setype: initrc_var_run_t
