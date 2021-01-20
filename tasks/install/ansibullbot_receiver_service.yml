@@ -9,7 +9,7 @@
   register: receiver_unit_file
   tags:
     - ansibullbot
-    - ansibullbot_receiever
+    - ansibullbot_receiver
 
 - name: RECEIVER | SystemD daemon reload
   systemd:
@@ -17,9 +17,9 @@
   when: receiver_unit_file is changed
   tags:
     - ansibullbot
-    - ansibullbot_receiever
+    - ansibullbot_receiver
 
-- name: RECEIVER | Install ansibullbot_receiever pip packages
+- name: RECEIVER | Install ansibullbot_receiver pip packages
   pip:
     name: "{{ ansibullbot_recevier_pip_packages }}"
     state: present
@@ -27,7 +27,7 @@
     virtualenv: "{{ ansibullbot_venv_dir }}"
   tags:
     - ansibullbot
-    - ansibullbot_receiever
+    - ansibullbot_receiver
 
 - name: RECEIVER | Start and enable ansibullbot-receiver
   systemd:
