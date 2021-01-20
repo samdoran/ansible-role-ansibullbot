@@ -22,19 +22,6 @@
     - ansibullbot
     - ansibullbot_logs
 
-- name: SERVICE | Create cron job to cleanup Shippable cache
-  cron:
-    cron_file: ansibullbot
-    hour: '03'
-    minute: '11'
-    user: "{{ ansibullbot_user }}"
-    name: Cleanup Shippable cache
-    job: find {{ ansibullbot_cache_dir }} -type f -atime +{{ ansibullbot_cache_days_to_keep }} -exec rm -f '{}' ';'
-  tags:
-    - ansibullbot
-    - ansibullbot_cache
-    - ansibullbot_cron
-
 - name: SERVICE | Create cron job to generate issues by file
   cron:
     cron_file: ansibullbot
