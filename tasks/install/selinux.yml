@@ -1,0 +1,53 @@
+- name: Enable SELinux
+  ansible.posix.selinux:
+    state: enforcing
+    policy: targeted
+  tags:
+    - ansibullbot
+    - ansibullbot_selinux
+    - notest
+
+- name: Enable domain_can_mmap_files
+  ansible.posix.seboolean:
+    name: domain_can_mmap_files
+    state: on
+    persistent: yes
+  tags:
+    - ansibullbot
+    - ansibullbot_selinux
+    - notest
+
+- name: Set fcontext
+  community.general.sefcontext:
+    target: "{{ item.target }}"
+    setype: "{{ item.setype }}"
+  notify: restorecon
+  loop:
+    - target: "{{ ansibullbot_home_dir }}(/.*)?"
+      setype: initrc_var_run_t
+
+    - target: '{{ ansibullbot_clone_path }}/scripts/.*\.cgi'
+      setype: httpd_sys_script_exec_t
+  tags:
+    - ansibullbot
+    - ansibullbot_selinux
+    - notest
+
+- name: Copy type enforcement file
+  copy:
+    src: ansibot_status.te
+    dest: "{{ ansibullbot_home_dir }}"
+    owner: "{{ ansibullbot_user }}"
+    group: "{{ ansibullbot_group }}"
+    mode: '0644'
+  notify: update_selinux_module
+  tags:
+    - ansibullbot
+    - ansibullbot_selinux
+    - notest
+
+- meta: flush_handlers
+  tags:
+    - ansibullbot
+    - ansibullbot_selinux
+    - notest

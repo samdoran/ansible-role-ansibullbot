@@ -9,6 +9,7 @@
   notify:
     - send slack message
     - restart ansibullbot
+    - restorecon
   tags:
     - ansibullbot_git
     - ansibullbot_update

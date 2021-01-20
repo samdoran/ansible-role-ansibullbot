@@ -1,0 +1,16 @@
+module ansibot_status 1.0;
+
+require {
+    type httpd_t;
+    type var_log_t;
+    type initrc_var_run_t;
+    class lnk_file read;
+    class dir read;
+    class file { open read };
+}
+
+#============= httpd_t ==============
+allow httpd_t initrc_var_run_t:dir read;
+allow httpd_t initrc_var_run_t:lnk_file read;
+allow httpd_t var_log_t:file read;
+allow httpd_t var_log_t:file open;

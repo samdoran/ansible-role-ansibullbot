@@ -20,5 +20,17 @@
     name: caddy
     state: reloaded
 
+- name: Create SELinux policy module
+  command: checkmodule -M -m -o {{ ansibullbot_home_dir }}/ansibot_status.mod {{ ansibullbot_home_dir }}/ansibot_status.te
+  listen: update_selinux_module
+
+- name: Compile SELinux policy package
+  command: semodule_package -m {{ ansibullbot_home_dir }}/ansibot_status.mod -o {{ ansibullbot_home_dir }}/ansibot_status.pp
+  listen: update_selinux_module
+
+- name: Install SELinux policy package
+  command: semodule -i {{ ansibullbot_home_dir }}/ansibot_status.pp
+  listen: update_selinux_module
+
 - name: restorecon
   command: restorecon -ir {{ ansibullbot_home_dir }}
