@@ -11,6 +11,7 @@
       paths:
         - vars
   tags:
+    - always
     - ansibullbot
 
 - include_tasks: "{{ ansibullbot_action }}/main.yml"
