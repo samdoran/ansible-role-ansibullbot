@@ -4,13 +4,15 @@ require {
     type httpd_t;
     type var_log_t;
     type initrc_var_run_t;
+    type unconfined_service_t;
     class lnk_file read;
-    class dir read;
-    class file { open read };
+    class dir { getattr search read };
+    class file { getattr open read };
 }
 
 #============= httpd_t ==============
 allow httpd_t initrc_var_run_t:dir read;
 allow httpd_t initrc_var_run_t:lnk_file read;
-allow httpd_t var_log_t:file read;
-allow httpd_t var_log_t:file open;
+allow httpd_t var_log_t:file { read open };
+allow httpd_t unconfined_service_t:dir { getattr search };
+allow httpd_t unconfined_service_t:file { open read };
