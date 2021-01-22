@@ -1,4 +1,4 @@
-module ansibot_status 1.0;
+module ansibot_status 1.1;
 
 require {
     type httpd_t;
@@ -7,12 +7,13 @@ require {
     type unconfined_service_t;
     class lnk_file read;
     class dir { getattr search read };
-    class file { getattr open read };
+    class file { getattr open read map ioctl };
 }
 
 #============= httpd_t ==============
 allow httpd_t initrc_var_run_t:dir read;
 allow httpd_t initrc_var_run_t:lnk_file read;
+allow httpd_t initrc_var_run_t:file { open map ioctl read getattr };
 allow httpd_t var_log_t:file { read open };
 allow httpd_t unconfined_service_t:dir { getattr search };
 allow httpd_t unconfined_service_t:file { open read };
