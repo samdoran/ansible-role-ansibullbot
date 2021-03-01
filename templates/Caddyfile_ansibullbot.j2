@@ -1,10 +1,10 @@
 {{ ansibullbot_url }} {
     root * {{ caddy_root }}/ansibot/html
 
-    @notstatus {
-        not path /status
+    @notcgi {
+        not path /status /actions
     }
-    file_server @notstatus
+    file_server @notcgi
 
     log {
         output file {{ ansibullbot_caddy_log_path }}/ansibot.log {
@@ -39,4 +39,5 @@
     rewrite /byfile/ /metadata/byfile_sorted.html
 
     cgi /status {{ ansibullbot_venv_dir }}/bin/python {{ ansibullbot_clone_path }}/scripts/ansibot_status.cgi
+    cgi /actions {{ ansibullbot_venv_dir }}/bin/python {{ ansibullbot_clone_path }}/scripts/ansibot_actions.py
 }
