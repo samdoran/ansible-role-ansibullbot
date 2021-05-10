@@ -1,5 +1,6 @@
 galaxy_info:
   role_name: ansibullbot
+  namespace: samdoran
   author: Sam Doran
   description: Ansible issue and pull request bot
   company: Ansible by Red Hat

@@ -1,6 +1,6 @@
 jobs:
   - job: Linux
-    displayName: Test
+    displayName: T
     pool:
       vmImage: ubuntu-20.04
     strategy:
@@ -12,8 +12,17 @@ jobs:
       - checkout: self
         path: ansibullbot
 
+      - script: pip3 install yamllint molecule molecule-docker ansible-core docker
+        displayName: Setup
+
+      - script: /home/vsts/.local/bin/yamllint -c molecule/yamllint.yml $(Build.Repository.LocalPath)
+        displayName: Lint
+
       - script: |
           export PATH=/home/vsts/.local/bin:$PATH
-          pip3 install molecule[docker,lint]==3.3.0 ansible-core
+          ansible-galaxy install -r molecule/requirements.yml
           molecule test
         displayName: Molecule
+        workingDirectory: $(Build.Repository.LocalPath)
+        env:
+          PY_COLORS: 1

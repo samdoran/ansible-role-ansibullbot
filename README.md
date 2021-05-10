@@ -1,6 +1,7 @@
 Ansibullbot
 =========
 [![Galaxy](https://img.shields.io/badge/galaxy-samdoran.ansibullbot-blue.svg?style=flat)](https://galaxy.ansible.com/samdoran/ansibullbot)
+[![Build Status](https://dev.azure.com/samdoran/ansible-role-ansibullbot/_apis/build/status/CI?branchName=azp-testing)](https://dev.azure.com/samdoran/ansible-role-ansibullbot/_build/latest?definitionId=3&branchName=azp-testing)
 
 Install [Ansibullbot](https://github.com/ansible/ansibullbot), your friendly neighborhood GitHub assistant.
 

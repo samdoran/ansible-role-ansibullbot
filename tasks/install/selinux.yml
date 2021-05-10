@@ -45,6 +45,10 @@
     - httpd_can_network_connect
     - httpd_unified
     - httpd_enable_cgi
+  tags:
+    - ansibullbot
+    - ansibullbot_selinux
+    - notest
 
 - meta: flush_handlers
   tags:

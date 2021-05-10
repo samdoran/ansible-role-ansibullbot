@@ -1,11 +1,9 @@
 dependency:
   name: galaxy
   enabled: no
+prerun: no
 driver:
   name: docker
-lint: |
-  ansible-lint -x 204,401,403,502 --exclude molecule/default/converge.yml --exclude .cache/ .
-  yamllint -c molecule/yamllint.yml .
 platforms:
   - name: ansibullbot-test-${MOLECULE_DISTRIBUTION:-centos8}
     image: "quay.io/samdoran/${MOLECULE_DISTRIBUTION:-centos8}-ansible:latest"
@@ -19,6 +17,8 @@ provisioner:
   config_options:
     defaults:
       stdout_callback: ansible.posix.debug
+      show_task_path_on_failure: yes
+      force_color: yes
   playbooks:
     converge: ${MOLECULE_PLAYBOOK:-converge.yml}
   options:
@@ -26,15 +26,11 @@ provisioner:
 scenario:
   name: default
   test_sequence:
-    - lint
     - destroy
-    - dependency
     - syntax
     - create
     - prepare
     - converge
-    # - idempotence
-    - side_effect
     - verify
     - destroy
 verifier:
