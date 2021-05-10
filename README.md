@@ -1,7 +1,6 @@
 Ansibullbot
 =========
 [![Galaxy](https://img.shields.io/badge/galaxy-samdoran.ansibullbot-blue.svg?style=flat)](https://galaxy.ansible.com/samdoran/ansibullbot)
-[![Build Status](https://travis-ci.com/samdoran/ansible-role-ansibullbot.svg?branch=master)](https://travis-ci.com/samdoran/ansible-role-ansibullbot)
 
 Install [Ansibullbot](https://github.com/ansible/ansibullbot), your friendly neighborhood GitHub assistant.
 

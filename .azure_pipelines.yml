@@ -1,0 +1,19 @@
+jobs:
+  - job: Linux
+    displayName: Test
+    pool:
+      vmImage: ubuntu-20.04
+    strategy:
+      matrix:
+        CentOS 8:
+          MOLECULE_DISTRIBUTION: centos8
+
+    steps:
+      - checkout: self
+        path: ansibullbot
+
+      - script: |
+          export PATH=/home/vsts/.local/bin:$PATH
+          pip3 install molecule[docker,lint]==3.3.0 ansible-core
+          molecule test
+        displayName: Molecule
