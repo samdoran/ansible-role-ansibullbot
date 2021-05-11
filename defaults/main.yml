@@ -49,6 +49,7 @@ ansibullbot_receiver_port: 5001
 # ansibullbot_azp:
 #   org:
 #   project:
+#   definition:
 
 ansibullbot_packages:
   - bash-completion
