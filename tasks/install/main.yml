@@ -1,5 +1,3 @@
-- import_tasks: selinux.yml
-
 - name: Set hostname
   hostname:
     name: "{{ inventory_hostname }}"
@@ -32,6 +30,8 @@
   tags:
     - ansibullbot
     - user
+
+- import_tasks: selinux.yml
 
 - name: Copy dotfiles for root
   copy:
