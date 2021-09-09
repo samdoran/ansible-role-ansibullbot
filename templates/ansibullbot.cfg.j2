@@ -12,21 +12,12 @@ shippable_token={{ ansibullbot_shippable_token }}
 slack_url={{ ansibullbot_slack_url }}
 {% endif %}
 {% if ansibullbot_repos is defined %}
-github_repos=
-{% for repo in ansibullbot_repos %}
-    {{ repo }}{% if not loop.last %},
-    {% endif %}
-{% endfor %}
+github_repos={{ ansibullbot_repos | join(',') }}
 {% endif %}
 {% if ansibullbot_maintainers is defined %}
-github_maintainers=
-{% for maintainer in ansibullbot_maintainers %}
-    {{ maintainer }}{% if not loop.last %},
-    {% endif %}
-{% endfor %}
+github_maintainers={{ ansibullbot_maintainers | join(',') }}
 {% endif %}
 
-{% endif %}
 {% if ansibullbot_azp is defined %}
 
 [azp]
