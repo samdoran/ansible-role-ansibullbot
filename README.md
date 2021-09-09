@@ -35,7 +35,6 @@ Role Variables
 | `ansibullbot_receiver_host` | `` | Database where data is sent. |
 | `ansibullbot_receiver_port` | `''` | Database port. |
 | `ansibullbot_repos` | `[undefined]` | List of repositories the bot will interact with. |
-| `ansibullbot_collection_repos` | `[undefined]` | List of collection repositories the bot will interact with. |
 | `ansibullbot_packages` | [see `defaults/main.yml`] | List of packages to install. |
 | `ansibullbot_slack_message` | `Updating Ansibullbot` | Message posted to Slack when updating Anisbullbot. |
 | `ansibullbot_slack_token` | `[]` | Slack API toke. This should be stored in an Ansible Vault. |

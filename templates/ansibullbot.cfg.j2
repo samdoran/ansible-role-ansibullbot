@@ -19,12 +19,6 @@ repos=
 {% endfor %}
 
 {% endif %}
-{% if ansibullbot_collection_repos is defined %}
-collection_repos=
-{% for repo in ansibullbot_collection_repos %}
-    {{ repo }}{% if not loop.last %},
-    {% endif %}
-{% endfor %}
 
 {% endif %}
 {% if ansibullbot_azp is defined %}
