@@ -20,7 +20,7 @@ Role Variables
 | `ansibullbot_group` | `{{ ansibullbot_user }}` | Group that `ansibullbot_user` belongs to. |
 | `ansibullbot_repo_url` | `https://github.com/ansible/ansibullbot` | URL of the ansibullbot git repo. |
 | `ansibullbot_branch` | `devel` | Branch of the ansibullbot git repo to checkout. |
-| `ansibullbot_home_dir` | `/home/{{ ansibullbot_user }}` | Where to create home directory for Ansibullbot user. |
+| `ansibullbot_home_dir` | `/var/lib/{{ ansibullbot_user }}` | Where to create home directory for Ansibullbot user. |
 | `ansibullbot_clone_path` | `{{ ansibullbot_home_dir }}/ansibullbot` | Where to clone the `ansibullbot` git repository. |
 | `ansibullbot_log_path` | `/var/log/ansibullbot.log` | Path to log file. |
 | `ansibullbot_cache_dir` | `{{ ansibullbot_home_dir }}/.ansibullbot/cache/shippable.runs/.raw` | Where cache files are stored. Used for cleaning up old cache files. |
