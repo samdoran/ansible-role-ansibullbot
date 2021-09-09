@@ -12,7 +12,7 @@ shippable_token={{ ansibullbot_shippable_token }}
 slack_url={{ ansibullbot_slack_url }}
 {% endif %}
 {% if ansibullbot_repos is defined %}
-repos=
+github_repos=
 {% for repo in ansibullbot_repos %}
     {{ repo }}{% if not loop.last %},
     {% endif %}
