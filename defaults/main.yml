@@ -45,6 +45,7 @@ ansibullbot_shippable_token: ''
 ansibullbot_receiver_host: 127.0.0.1
 ansibullbot_receiver_port: 5001
 # ansibullbot_repos: []
+# ansibullbot_maintainers: []
 # ansibullbot_azp:
 #   org:
 #   project:

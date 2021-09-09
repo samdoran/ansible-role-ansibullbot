@@ -17,7 +17,13 @@ github_repos=
     {{ repo }}{% if not loop.last %},
     {% endif %}
 {% endfor %}
-
+{% endif %}
+{% if ansibullbot_maintainers is defined %}
+github_maintainers=
+{% for maintainer in ansibullbot_maintainers %}
+    {{ maintainer }}{% if not loop.last %},
+    {% endif %}
+{% endfor %}
 {% endif %}
 
 {% endif %}
