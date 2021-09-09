@@ -5,9 +5,6 @@ debug={{ ansibullbot_debug }}
 github_username={{ ansibullbot_github_username }}
 github_password={{ ansibullbot_github_password }}
 github_token={{ ansibullbot_github_token }}
-{% if ansibullbot_ci_provider == 'shippable' %}
-shippable_token={{ ansibullbot_shippable_token }}
-{% endif %}
 {% if ansibullbot_slack_url is defined %}
 slack_url={{ ansibullbot_slack_url }}
 {% endif %}
