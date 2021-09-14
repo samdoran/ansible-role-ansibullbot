@@ -5,28 +5,16 @@ debug={{ ansibullbot_debug }}
 github_username={{ ansibullbot_github_username }}
 github_password={{ ansibullbot_github_password }}
 github_token={{ ansibullbot_github_token }}
-{% if ansibullbot_ci_provider == 'shippable' %}
-shippable_token={{ ansibullbot_shippable_token }}
-{% endif %}
 {% if ansibullbot_slack_url is defined %}
 slack_url={{ ansibullbot_slack_url }}
 {% endif %}
 {% if ansibullbot_repos is defined %}
-repos=
-{% for repo in ansibullbot_repos %}
-    {{ repo }}{% if not loop.last %},
-    {% endif %}
-{% endfor %}
-
+github_repos={{ ansibullbot_repos | join(',') }}
 {% endif %}
-{% if ansibullbot_collection_repos is defined %}
-collection_repos=
-{% for repo in ansibullbot_collection_repos %}
-    {{ repo }}{% if not loop.last %},
-    {% endif %}
-{% endfor %}
-
+{% if ansibullbot_maintainers is defined %}
+github_maintainers={{ ansibullbot_maintainers | join(',') }}
 {% endif %}
+
 {% if ansibullbot_azp is defined %}
 
 [azp]

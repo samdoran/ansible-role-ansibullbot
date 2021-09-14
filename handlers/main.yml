@@ -2,6 +2,7 @@
   community.general.slack:
     msg: "{{ ansibullbot_slack_message }}"
     token: "{{ ansibullbot_slack_token }}"
+  when: ansibullbot_slack_token is truthy
 
 - name: restart ansibullbot
   systemd:

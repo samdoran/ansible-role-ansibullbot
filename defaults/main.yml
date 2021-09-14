@@ -7,7 +7,6 @@ ansibullbot_home_dir: /var/lib/{{ ansibullbot_user }}
 ansibullbot_clone_path: "{{ ansibullbot_home_dir }}/ansibullbot"
 ansibullbot_log_path: /var/log/ansibullbot.log
 ansibullbot_caddy_log_path: /var/log/caddy/ansibot.log
-ansibullbot_cache_dir: "{{ ansibullbot_home_dir }}/.ansibullbot/cache/shippable.runs/.raw"
 ansibullbot_fqdn: ansibullbot.eng.ansible.com
 ansibullbot_url: "{{ ansibullbot_fqdn }}"
 ansibullbot_venv_dir: "{{ ansibullbot_home_dir }}/venv"
@@ -36,16 +35,15 @@ ansibullbot_options:
 
 
 # Settings for ansibullbot.cfg
-ansibullbot_ci_provider: shippable
+ansibullbot_ci_provider: azp
 ansibullbot_debug: true
 ansibullbot_github_username: ansibot
 ansibullbot_github_password: ''
 ansibullbot_github_token: ''
-ansibullbot_shippable_token: ''
 ansibullbot_receiver_host: 127.0.0.1
 ansibullbot_receiver_port: 5001
 # ansibullbot_repos: []
-# ansibullbot_collection_repos: []
+# ansibullbot_maintainers: []
 # ansibullbot_azp:
 #   org:
 #   project:
